@@ -1,8 +1,8 @@
+from __future__ import division
 import os
 import sys
 import math
 import nltk
-from __future__ import division
 
 def prepare(path2corpus):
 	
@@ -44,9 +44,9 @@ def cal_idoc_freq(dist2cal, path2corpus):
 
 			if filelist.count(key) != 0:
 				
-				count++
+				count = count + 1
 
-		dist2cal[key] = math.log10(len(filelists) / count++)
+		dist2cal[key] = math.log10(len(filelists) / (count + 1))
 
 	return dist2cal
 
@@ -62,7 +62,7 @@ for key in term_freq.keys():
 
 	tfidf[key] = term_freq[key] * idoc_freq[key]
 
-print tfidf[:10]
+print tfidf.keys()[:10]
 
 
 
