@@ -10,7 +10,7 @@ def prepare(path2corpus):
 
 	for file in files:
 
-		filelists[files] = [term for term in open(file, 'r').read(-1).split()]
+		filelists[file] = [term for term in open(file, 'r').read(-1).split()]
 
 	return filelists
 
@@ -28,4 +28,19 @@ def cal_term_freq(text):
 
 	return freqdist
 
-def cal_idoc_freq(dist):
+def cal_idoc_freq(dist2cal, path2corpus):
+
+	filelists = prepare(path2corpus)
+
+	for key in dist2cal.keys():
+
+		
+
+
+
+
+
+
+
+
+
