@@ -40,7 +40,7 @@ def cal_idoc_freq(dist2cal, path2corpus):
 
 		count = 0
 
-		for filelist in filelists:
+		for filelist in filelists:								#speed up
 
 			if filelist.count(key) != 0:
 				
