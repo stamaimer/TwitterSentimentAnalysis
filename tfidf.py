@@ -1,4 +1,6 @@
 import os
+import sys
+import math
 import nltk
 from __future__ import division
 
@@ -6,11 +8,13 @@ def prepare(path2corpus):
 	
 	files = os.listdir(path2corpus)
 
-	filelists = {}
+	filelists = []
 
 	for file in files:
 
-		filelists[file] = [term for term in open(file, 'r').read(-1).split()]
+		filelist = [term for term in open(file, 'r').read(-1).split()]
+
+		filelists.append(nltk.Text(filelist))
 
 	return filelists
 
@@ -34,7 +38,33 @@ def cal_idoc_freq(dist2cal, path2corpus):
 
 	for key in dist2cal.keys():
 
-		
+		count = 0
+
+		for filelist in filelists:
+
+			if filelist.count(key) != 0:
+				
+				count++
+
+		dist2cal[key] = math.log10(len(filelists) / count++)
+
+	return dist2cal
+
+file = open(sys.argv[1], 'r')
+
+term_freq = cal_term_freq(file.read(-1))
+
+idoc_freq = cal_idoc_freq(term_freq, sys.argv[2])
+
+tfidf = {}
+
+for key in term_freq.keys():
+
+	tfidf[key] = term_freq[key] * idoc_freq[key]
+
+print tfidf[:10]
+
+
 
 
 
