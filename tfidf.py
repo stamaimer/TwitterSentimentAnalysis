@@ -1,4 +1,5 @@
 from __future__ import division
+import re
 import os
 import sys
 import math
@@ -23,6 +24,10 @@ def cal_term_freq(text):
 	terms    = [term for term in text.split()]
 
 	length   = len(terms)
+
+	for i in range(0, length):
+
+		terms[i] = re.sub('[\W]', '', terms[i])
 
 	freqdist = nltk.FreqDist(terms)
 
