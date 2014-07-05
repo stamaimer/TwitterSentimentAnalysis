@@ -1,56 +1,15 @@
-INTRODUCTION
-With the popularity and development of the Internet, the transmission of data on the internet increased a lot, which has made the internet become one of the major public media, and social app is also a member of the group which generates and transmits information through the internet. These apps propelling the spread of social news, public opinion and other aspects have made social media a new role of information dissemination. 
-According to the survey of iResearch, the time that people spend on social media reaches 4.6 hours by the end of September 2009, 6.9 hours by the end of 2012, and will keep increasing in the future.
+In 2012, the second Confucius Institute in Alabama was established at Auburn Montgomery. (Troy University hosts Alabama's other Confucius Institute.) Ceremonies in Montgomery, which included Chinese and Alabama officials, followed ceremonies in Beijing and Wuhan.
 
-	Since people spend so much time on social media, it is worthy to utilize them to collect and uncover various kinds of health information. There are many researchers engaging in the analysis of English social media for disease surveillance or related works. In 2006, a website called “who is sick” is developed for people to post their sickness information. In 2009, Jeremy Ginsber predicted flu 1 to 2 week earlier than Centers for Disease Control (CDC) through analyzing the log files of google search. After that, more researchers predicted the time of disease outbreak by using internet data. Ficeifeld C C collect users’ health information through an application installed on mobile phones and then detect diseases. Adam Sadilek analyze the content of Twitter of the users and their friends, and then use them to predict user’s body health state with a high degree of 0.9 precision. However, few researches have been done on diseases surveillance by analyzing Chinese social media. The limited work for that focus on classifying Chinese texts into different kinds of categories (sports, news and etc.). For example, Zhengyan Cui classifies short text with K Nearest Neighbor (KNN). Yang F proposes a method of automatic detection of rumor Sina micro-blogs. However, almost all of these disease surveillance researches are based on Twitter, and to best of our knowledge, there are no researches on disease surveillance through mining Chinese social media.
-	This paper aims to predicate people’s health status in a region of Beijing based on micro-blogs. Our research flow is shown in Figure 2. We begin by feasibility analysis and propose a method to predict disease. Then we start to collecting the data from Sina and classify them manually; We build upon previous work on classification of text messages (k-means, KNN, SVM), to get a better result with a relatively better classifier. As a result, we classify Sina micro-blog with 87.49% precision and 92.28% recall in average.
+The institute is affiliated with the Office of Chinese Language Council International, a non-government and nonprofit organization affiliated with the Chinese government. It is one of more than 300 Confucius institutes worldwide whose purpose is to promote "the teaching of the Chinese (Mandarin) language and promote educational and cultural exchanges." The institute reflects AUM's Far Eastern Initiatives and the relationship of the AUM community with 34 Chinese universities.
 
-	This work is an important step towards predicting disease based on Chinese social media. It explores the process of classification of short text, and compares different kinds of method in the process of classification to get a better result. It also provides foundation for researches on predicting disease by analyzing social media information.
-The Data
-Micro-blog is a kind of blog service through which people can post their messages no more than 140 characters. It makes users to express their thought briefly and encourages frequent information updates. In China, there are mainly three such kind of micro-blogs: Sina micro-blog (http://weibo.com/), Tencent micro-blog (http://t.qq.com/), NetEase micro-blog (http://t.163.com/) and sohu micro-blog (http://t.sohu.com/). According to the analysis of google trend from 2010(Figure 3), Sina micro-blog is the most popular Chinese social media, so our analysis and evaluation are based on data obtained from Sina micro-blog. 
+In the last two years, the Confucius Institute has hosted or sponsored numerous activities, ranging from cultural events to free Chinese language classes to intensive business Chinese classes for which tuition is required. There are even trips to China for local public school teachers and students.
 
-	Sina provides convenient API for obtaining data, such as ‘public micro-blog’; ‘location based micro-blog’; ‘location nearby micro-blog’ etc. We choose ‘location nearby micro-blog’ (Its main request parameters are listed in Table 1) because we try to get all the micro-blogs in this area with location information called geo-tagged micro-blog. This paper chooses a circle area in Beijing as shown in Figure 4.
+On the institute's first anniversary, ground was broken for a Confucius Garden on one of the highest elevations on the AUM campus. The centerpiece of that garden is a Chinese-made, larger-than-life bronze bust of the Chinese philosopher Confucius (551-479 BC).
 
+As have so many philosophers and religious leaders, Confucius taught that individuals ultimately are responsible for their own behavior, which must be based on compassion or love for others. Confucius taught that self-discipline and the subordination of self are required to serve the needs of family and the larger community. Without serving family, neighborhood, school, community, work, government, and nation — before self — there is strife and disorder.
 
-	Using ‘location nearby micro-blog’ API and Java scripts, we collect Sina micro-blogs of this circle area（longitude: 116.39750833333, latitude: 39.908647222222） from September 2013 to December 2013. There are 3505110 pieces of micro-blog in total， which includes 951299 pieces of micro-blog in September, 900337 pieces of micro-blog in October, 861590 pieces of micro-blog in November, and 791884 pieces of micro-blog in December. Our dataset is related to 374411 persons, and so there are 4.4 pieces of micro-blogs per person in average.
-	We select 5000 pieces of status randomly and classify them manually into two categories; one is ‘sick micro-blog’ which indicates the author of this status is sick; the other one is ‘not sick micro-blog’ which indicates the author of this status is not sick. Among these micro-blogs, we get 285 ‘sick micro-blog’, and select 285 ‘not sick micro-blog’ as training data and test data.
-Approach
-In this section, we compare different kinds of method in every step of process of classification as shown in Figure 5. First, we conduct some preprocessing to eliminate the noise information, and then use text model to express the content of every piece of micro-blog. After that we train the classifier using training data and the results are record into model file. Then , we predicate the flu based on the training model and the test data. Finally, we evaluate our proposed method and report the results.
+Since service before self is contrary to human nature, Confucius thought that it could only be fully understood and internalized by long, serious study and reflection. This leads to a moral life of integrity and to a harmonious society.
 
-Textual Feature
-Chinese is not like English which has blank space between each word. Although there are many kinds of Chinese word segmentation systems which can provide word segmentation with a high accuracy, however it is not really easy to determine whether using word or character as textual features. This paper uses the same dataset and the same classifier to compare these two kinds of features, from the result, we can know that using word as features can get a higher accuracy and recall, so we use word as features, for example: a micro-blog ‘I am sick’ is represented by following feature vector:
-(我感冒了)=(我,感冒,了)
-(I am sick) = (I, am, sick)
+Confucianism has influenced East Asian culture for more than 2,000 years, and today it influences those of East Asian ancestry all over the world. It seems even more remarkable as Christianity and its message of love and selflessness declines in the West, where it is increasingly supplanted by materialism with its values of self-absorption and self-gratification.
 
-Word weighting
-	Word weighting is another problem which should be considered when we start to classify micro-blogs. There are four kinds of word weighting method: Boolean weighting, term frequency weighting (TF), inverted document frequency weighting (IDF) and term frequency-inverted document frequency weighting (TFIDF). Boolean weighting does not consider the importance of each word, and term frequency weighting does not consider the entire corpus, so this paper compare IDF with TDIDF, the accuracy of TDIDF (Figure 9) is 90.00% which is much higher than IDF (Figure 8), so this paper uses TFIDF as a method of word weighting.
-
-Classifier
-Since machine learning can be mainly classified into two categories: Supervised learning and unsupervised learning. This paper select SVM as an example of supervised learning and K-means as an example of unsupervised learning to compare their performance. We get low accuracy values 47.02% for the former, so supervised learning can be much better than unsupervised learning. And we then use K Nearest Neighbors (KNN) as a classifier to compare with SVM.
-
-KNN aims at finding k nearest class:
-
-
-dnew stands for a new document need to be classified, dk stands for the kth document of the corpus.
-SVM aims at finding a hyper plane to classify samples:
-
-Where  stands for sign function, and  stands for the kernel function of SVM.
-Using KNN, we achieve 63.15% precision, and the result suggests that KNN is also better than K-means, but is not as well as SVM which achieves 90.00% precision.
-Table 2 KNN classification confusion matrix
-
-	What’s worse, KNN has lower efficiency than SVM when used to classify with big data. When the number of micro-blog needed to be classified grows from 1000 to 100000, the time consumed by KNN to finish this task is raised from 9.8 seconds to 524.67 seconds. However, the time consumed by SVM is always less than 1seconds.
-
-Experiment
-According to the experiment results in section 2.2.1, 2.2.2 and 2.2.3, we decide to use words as features, TFIDF as word weighting method, SVM as classifier, and we use SVM_LIGHT as a convenient tool for our experiments. This SVM is robust and includes algorithm for approximately training large transductive SVMs for big data set. 
-	To prove this classifier is stable and reliable, this paper uses K-Fold cross validation for verification, and we use 5-fold for this test:
-Table 3 5-Fold classification experiment
-
-	From this experiment, we finally achieve 87.49% precision in average, 92.28% recall in average and 89.68% F1 measure in average. These prove that using our classification model can distinguish between ‘sick micro-blog’ and ‘not sick micro-blog’, so we use this model to our dataset from September 2013 to December 2013.
-Table 4 Classification between September and December 2013
-
-	From Figure 12 we know that the number of sick people has risen obviously, so this paper uses the same classification model to classify the micro-blogs day by day in December, and get the result as shown in Figure 13:
-
-As shown in Figure 13, the ratio of ‘sick micro-blog’ rose from September 9th 2013, and peaked as 1.4% on September 17th 2013. Compared with the data from China Nation Influenza Center (CNIC), we predict outbreak time of flu 5 days earlier. CNIC’s data suggests that seasonal influenza achieves a litter higher level from September 15th 2013, and rises to a much higher level in this month. 
-CONCLUSION
-In an information explosion age, extracting information from big data is a challenge. This paper explores the general steps of Chinese text classification facing with big social media data, which can also be used in other similar fields. This work is the first to predict the trend of diseases in the real world based on Chinese social media. We combine social media data with spatio-temporal data, and successfully predict outbreak time of flu 5 days earlier than CNIC.
-In the future, we need to take more consideration on spatio-temporal data, and investigate the flu’s continuing influence on an individual for a period time. Since most users of Sina micro-blogs are the generation born in 80s and 90s, we also should obtain more data for other ages to obtain a more comprehensive result.
+Historian Benton writes from Montgomery.
