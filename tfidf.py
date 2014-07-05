@@ -21,13 +21,11 @@ def prepare(path2corpus):
 
 def cal_term_freq(text):
 
+	text = re.sub('[\W]', ' ', text)
+
 	terms    = [term for term in text.split()]
 
 	length   = len(terms)
-
-	for i in range(0, length):
-
-		terms[i] = re.sub('[\W]', '', terms[i])
 
 	freqdist = nltk.FreqDist(terms)
 

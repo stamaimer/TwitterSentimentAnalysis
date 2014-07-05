@@ -1,39 +1,56 @@
-Editor's note: Jonathan Mann profiles Nobel Peace Prize winner Liu Xiaobo in a special show on CNN International and on CNN.com. "Prize for Peace: Nobel 2010": Friday 1700 CET, 2000 Abu Dhabi; Sat: 0000 HK
-Oslo, Norway (CNN) -- An empty chair stood in for imprisoned Chinese dissident Liu Xiaobo as he was awarded the Nobel Peace Prize in absentia on Friday amid protests and condemnation from China.
-China has responded furiously since the Nobel committee announced on October 8 that Liu would be its peace prize winner. Officials have repeatedly called Liu a common criminal and declared the award a Western plot against China.
-The rhetoric continued Friday with China calling the awarding of the prize to Liu a "political farce."
-"The decision of the Norwegian Nobel Committee does not represent the wish of the majority of the people in the world, particularly that of the developing countries," said Jiang Yu, a Chinese Foreign Ministry official.
-Liu, a professor of literature, is serving an 11-year sentence in a Chinese prison for what the government called "inciting subversion of state power." He was not allowed to travel to Norway to accept the prize, nor was his wife, Liu Xia.
-Past Nobel Peace Prize winners Nobel Peace Prize politics Jailed dissident wins Nobel prize
-Nobel committee chairman Thorbjorn Jagland, in awarding the prize Friday, likened Liu Xiaobo to Nelson Mandela, the former South African president who fought the apartheid regime.
-After announcing the award, Jagland placed Liu's medal in the empty chair, the second time such a symbol has been used in the event.
-Before the ceremony, some Twitter users who listed their location as Beijing had changed their profile pictures to an empty chair.
-In his speech, Jagland commended China for lifting millions out of poverty, but said democracy and free speech must go hand in hand with its economic development.
-"China, too, will grow stronger if its people are granted civil rights," Jagland said.
-While Chinese officials have said the prize represents a Western perspective, human rights activists in China "represent the world's common values and standards," Jagland said.
-He added that Liu has done nothing wrong and "must be released."
-U.S. President Barack Obama also called for Liu's immediate release.
-"Mr. Liu reminds us that human dignity also depends upon the advance of democracy, open society, and the rule of law," Obama said in a statement. "The values he espouses are universal, his struggle is peaceful, and he should be released as soon as possible."
-As the awards ceremony was getting under way, a large number of officers stood guard outside the west central Beijing apartment complex where Liu's wife has been under house arrest since her husband's award was announced. Journalists were cordoned off in a small area next to the building.
-The police presence outside the Norwegian Embassy in Beijing had also increased early Friday as groups of protesters gathered there and at the city's U.N. offices.
-Jagland said Thursday that the award is not a protest.
-"It is a signal to China that it would be very important for China's future to combine economic development with political reforms and it is support for those people in China who are struggling for basic human rights," Jagland told reporters.
-Beijing also put pressure on its allies and other countries not to attend the peace prize ceremony, and it hastily announced its own honor -- the Confucius Peace Prize, which was awarded Thursday to former Taiwanese Vice President Lien Chan. That award was accepted by a 6-year-old girl on Lien's behalf. Lien did not know about the prize, his office said.
-Amnesty International said it had received reports from "reliable sources" that Chinese diplomats in Norway have been pressuring Chinese residents into joining anti-Nobel demonstrations.
-On Thursday, the U.N.'s human rights chief called for Liu's release from prison and criticized what she said were "recent restrictions placed on an ever-widening circle" of the dissident's associates.
-"In recent weeks, my office has received reports of at least 20 activists being arrested or detained and more than 120 other cases of house arrest, travel restrictions, forced relocations and other acts of intimidation," U.N. High Commissioner for Human Rights Navi Pillay told reporters.
-Jagland said the committee expected a "harsh reaction" from Beijing.
-But "we are very glad to see that two-thirds of the nations that have embassies in Oslo will be attending the ceremony, and most of them are very big, very important countries," he added.
-Among those attending was U.S. House Speaker Nancy Pelosi, who was part of the official delegation on behalf of Liu and his wife.
-Of the 19 countries that declined to come to Friday's ceremony -- including China, Russia, Saudi Arabia, Pakistan, Iraq and Iran -- Jagland said Thursday that two had reconsidered: Ukraine and the Philippines.
-But the state-run China Daily newspaper reported Friday that "most nations" had expressed their support for China's stance, citing a Chinese Foreign Ministry spokeswoman.
-The spokeswoman, Jiang Yu, said the award would not change the fact that "Liu committed crimes."
-Friday's ceremony included songs by a children's choir -- a special request made by Liu through his wife, according to Lundestad. And Norwegian actress Liv Ullmann was on hand to read one of Liu's "most interesting and beautiful texts," Jagland said.
-Jagland predicted that keeping Liu, 54, in prison for the entirety of his 11-year sentence may prove impossible after the prize was awarded.
-"The pressure from the outside world will be on China to release him. In today's world, it is totally impossible to close a country. We already know that a lot of Chinese know about the prize, and this is creating a huge pressure on China," Jagland said.
-Several foreign news websites -- including CNN and BBC -- were blocked in mainland China Thursday and Friday.
-Broadcasts of CNN International were blacked out intermittently, when news of the peace prize was reported. CNN reports about China's new Confucius Peace Prize were not blocked.
-Internet companies in China are treating Chinese characters for "Liu Xiaobo," "Nobel," and peace prize as "sensitive words," said Jeremy Goldkorn, editor of Danwei.org -- a website about Chinese media and Internet. Acting on government instructions, the companies are deleting text containing those words, preventing such text from being uploaded, or returning no results on searches for the words, he said.
-"I think the main aim is to reduce the chances of Chinese citizens seeing that the Liu Xiaobo Nobel Prize is big news internationally, and to make it more difficult for articles sympathetic to Liu Xiaobo and photos of him to be copied and circulated inside China," Goldkorn said.
-The last time an empty chair was used to represent an absent winner was when German peace activist Carl von Ossietzky won the 1935 award, according to Geir Lundestad, director of the Nobel Institute. Ossietzky was under "protective custody" in Nazi Germany and could not come to accept the award in person, nor was he represented by anyone.
-Three other Nobel peace laureates were also unable to attend their ceremonies for political reasons -- human rights activist Aung San Suu Kyi, Polish trade union leader Lech Walesa, and Russian Cold War dissident Andrei Sakharov -- but spouses or other relatives accepted the awards on their behalf.
+INTRODUCTION
+With the popularity and development of the Internet, the transmission of data on the internet increased a lot, which has made the internet become one of the major public media, and social app is also a member of the group which generates and transmits information through the internet. These apps propelling the spread of social news, public opinion and other aspects have made social media a new role of information dissemination. 
+According to the survey of iResearch, the time that people spend on social media reaches 4.6 hours by the end of September 2009, 6.9 hours by the end of 2012, and will keep increasing in the future.
+
+	Since people spend so much time on social media, it is worthy to utilize them to collect and uncover various kinds of health information. There are many researchers engaging in the analysis of English social media for disease surveillance or related works. In 2006, a website called “who is sick” is developed for people to post their sickness information. In 2009, Jeremy Ginsber predicted flu 1 to 2 week earlier than Centers for Disease Control (CDC) through analyzing the log files of google search. After that, more researchers predicted the time of disease outbreak by using internet data. Ficeifeld C C collect users’ health information through an application installed on mobile phones and then detect diseases. Adam Sadilek analyze the content of Twitter of the users and their friends, and then use them to predict user’s body health state with a high degree of 0.9 precision. However, few researches have been done on diseases surveillance by analyzing Chinese social media. The limited work for that focus on classifying Chinese texts into different kinds of categories (sports, news and etc.). For example, Zhengyan Cui classifies short text with K Nearest Neighbor (KNN). Yang F proposes a method of automatic detection of rumor Sina micro-blogs. However, almost all of these disease surveillance researches are based on Twitter, and to best of our knowledge, there are no researches on disease surveillance through mining Chinese social media.
+	This paper aims to predicate people’s health status in a region of Beijing based on micro-blogs. Our research flow is shown in Figure 2. We begin by feasibility analysis and propose a method to predict disease. Then we start to collecting the data from Sina and classify them manually; We build upon previous work on classification of text messages (k-means, KNN, SVM), to get a better result with a relatively better classifier. As a result, we classify Sina micro-blog with 87.49% precision and 92.28% recall in average.
+
+	This work is an important step towards predicting disease based on Chinese social media. It explores the process of classification of short text, and compares different kinds of method in the process of classification to get a better result. It also provides foundation for researches on predicting disease by analyzing social media information.
+The Data
+Micro-blog is a kind of blog service through which people can post their messages no more than 140 characters. It makes users to express their thought briefly and encourages frequent information updates. In China, there are mainly three such kind of micro-blogs: Sina micro-blog (http://weibo.com/), Tencent micro-blog (http://t.qq.com/), NetEase micro-blog (http://t.163.com/) and sohu micro-blog (http://t.sohu.com/). According to the analysis of google trend from 2010(Figure 3), Sina micro-blog is the most popular Chinese social media, so our analysis and evaluation are based on data obtained from Sina micro-blog. 
+
+	Sina provides convenient API for obtaining data, such as ‘public micro-blog’; ‘location based micro-blog’; ‘location nearby micro-blog’ etc. We choose ‘location nearby micro-blog’ (Its main request parameters are listed in Table 1) because we try to get all the micro-blogs in this area with location information called geo-tagged micro-blog. This paper chooses a circle area in Beijing as shown in Figure 4.
+
+
+	Using ‘location nearby micro-blog’ API and Java scripts, we collect Sina micro-blogs of this circle area（longitude: 116.39750833333, latitude: 39.908647222222） from September 2013 to December 2013. There are 3505110 pieces of micro-blog in total， which includes 951299 pieces of micro-blog in September, 900337 pieces of micro-blog in October, 861590 pieces of micro-blog in November, and 791884 pieces of micro-blog in December. Our dataset is related to 374411 persons, and so there are 4.4 pieces of micro-blogs per person in average.
+	We select 5000 pieces of status randomly and classify them manually into two categories; one is ‘sick micro-blog’ which indicates the author of this status is sick; the other one is ‘not sick micro-blog’ which indicates the author of this status is not sick. Among these micro-blogs, we get 285 ‘sick micro-blog’, and select 285 ‘not sick micro-blog’ as training data and test data.
+Approach
+In this section, we compare different kinds of method in every step of process of classification as shown in Figure 5. First, we conduct some preprocessing to eliminate the noise information, and then use text model to express the content of every piece of micro-blog. After that we train the classifier using training data and the results are record into model file. Then , we predicate the flu based on the training model and the test data. Finally, we evaluate our proposed method and report the results.
+
+Textual Feature
+Chinese is not like English which has blank space between each word. Although there are many kinds of Chinese word segmentation systems which can provide word segmentation with a high accuracy, however it is not really easy to determine whether using word or character as textual features. This paper uses the same dataset and the same classifier to compare these two kinds of features, from the result, we can know that using word as features can get a higher accuracy and recall, so we use word as features, for example: a micro-blog ‘I am sick’ is represented by following feature vector:
+(我感冒了)=(我,感冒,了)
+(I am sick) = (I, am, sick)
+
+Word weighting
+	Word weighting is another problem which should be considered when we start to classify micro-blogs. There are four kinds of word weighting method: Boolean weighting, term frequency weighting (TF), inverted document frequency weighting (IDF) and term frequency-inverted document frequency weighting (TFIDF). Boolean weighting does not consider the importance of each word, and term frequency weighting does not consider the entire corpus, so this paper compare IDF with TDIDF, the accuracy of TDIDF (Figure 9) is 90.00% which is much higher than IDF (Figure 8), so this paper uses TFIDF as a method of word weighting.
+
+Classifier
+Since machine learning can be mainly classified into two categories: Supervised learning and unsupervised learning. This paper select SVM as an example of supervised learning and K-means as an example of unsupervised learning to compare their performance. We get low accuracy values 47.02% for the former, so supervised learning can be much better than unsupervised learning. And we then use K Nearest Neighbors (KNN) as a classifier to compare with SVM.
+
+KNN aims at finding k nearest class:
+
+
+dnew stands for a new document need to be classified, dk stands for the kth document of the corpus.
+SVM aims at finding a hyper plane to classify samples:
+
+Where  stands for sign function, and  stands for the kernel function of SVM.
+Using KNN, we achieve 63.15% precision, and the result suggests that KNN is also better than K-means, but is not as well as SVM which achieves 90.00% precision.
+Table 2 KNN classification confusion matrix
+
+	What’s worse, KNN has lower efficiency than SVM when used to classify with big data. When the number of micro-blog needed to be classified grows from 1000 to 100000, the time consumed by KNN to finish this task is raised from 9.8 seconds to 524.67 seconds. However, the time consumed by SVM is always less than 1seconds.
+
+Experiment
+According to the experiment results in section 2.2.1, 2.2.2 and 2.2.3, we decide to use words as features, TFIDF as word weighting method, SVM as classifier, and we use SVM_LIGHT as a convenient tool for our experiments. This SVM is robust and includes algorithm for approximately training large transductive SVMs for big data set. 
+	To prove this classifier is stable and reliable, this paper uses K-Fold cross validation for verification, and we use 5-fold for this test:
+Table 3 5-Fold classification experiment
+
+	From this experiment, we finally achieve 87.49% precision in average, 92.28% recall in average and 89.68% F1 measure in average. These prove that using our classification model can distinguish between ‘sick micro-blog’ and ‘not sick micro-blog’, so we use this model to our dataset from September 2013 to December 2013.
+Table 4 Classification between September and December 2013
+
+	From Figure 12 we know that the number of sick people has risen obviously, so this paper uses the same classification model to classify the micro-blogs day by day in December, and get the result as shown in Figure 13:
+
+As shown in Figure 13, the ratio of ‘sick micro-blog’ rose from September 9th 2013, and peaked as 1.4% on September 17th 2013. Compared with the data from China Nation Influenza Center (CNIC), we predict outbreak time of flu 5 days earlier. CNIC’s data suggests that seasonal influenza achieves a litter higher level from September 15th 2013, and rises to a much higher level in this month. 
+CONCLUSION
+In an information explosion age, extracting information from big data is a challenge. This paper explores the general steps of Chinese text classification facing with big social media data, which can also be used in other similar fields. This work is the first to predict the trend of diseases in the real world based on Chinese social media. We combine social media data with spatio-temporal data, and successfully predict outbreak time of flu 5 days earlier than CNIC.
+In the future, we need to take more consideration on spatio-temporal data, and investigate the flu’s continuing influence on an individual for a period time. Since most users of Sina micro-blogs are the generation born in 80s and 90s, we also should obtain more data for other ages to obtain a more comprehensive result.
