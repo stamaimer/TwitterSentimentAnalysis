@@ -48,7 +48,7 @@ payloads = {"delimited":"length"}
 
 paramstr = ""
 
-#params.update(payloads)
+params.update(payloads)
 
 for key in sorted(params):
 	paramstr = paramstr + urlencode(key) + "=" + urlencode(params[key]) + "&"
@@ -74,8 +74,9 @@ authorization = "OAuth "\
 headers = {"authorization":authorization}
 
 #response = requests.post(url, data = payloads, headers = headers, stream = True)
-response = requests.get(url, headers=headers, stream=True)
-
+response = requests.get(url, params = payloads, headers = headers, stream = True)
+#response = requests.get(url, headers=headers, stream=True)
+print response.url
 print response.status_code
 
 for line in response.iter_lines():
