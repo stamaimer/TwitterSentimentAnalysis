@@ -19,10 +19,10 @@ def gen_nonce():
 	return re.sub('[\W_]', '', 	base64.b64encode(os.urandom(32)))
 
 #url = "https://stream.twitter.com/1.1/statuses/filter.json"
-#url = "https://stream.twitter.com/1.1/statuses/sample.json"
-url = "https://stream.twitter.com/1.1/statuses/firehose.json"
+url = "https://stream.twitter.com/1.1/statuses/sample.json"
+#url = "https://stream.twitter.com/1.1/statuses/firehose.json"
 
-keyword  = "Confucius Institute"
+#keyword  = "Confucius Institute"
 
 secrets = {\
 		   "consumer_secret":"oFAlNZr6JGHwCdYGrYNfS3plUSdxg8UlEP2RtiKg59uSYahWRk",\
@@ -44,11 +44,11 @@ params = {\
 		 }
 
 #payloads = {"track":keyword}
-payloads = {"delimited":"length"}
+#payloads = {"delimited":"length"}
 
 paramstr = ""
 
-params.update(payloads)
+#params.update(payloads)
 
 for key in sorted(params):
 	paramstr = paramstr + urlencode(key) + "=" + urlencode(params[key]) + "&"
@@ -74,12 +74,12 @@ authorization = "OAuth "\
 headers = {"authorization":authorization}
 
 #response = requests.post(url, data = payloads, headers = headers, stream = True)
-response = requests.get(url, params = payloads, headers = headers, stream = True)
-#response = requests.get(url, headers=headers, stream=True)
+#response = requests.get(url, params = payloads, headers = headers, stream = True)
+response = requests.get(url, headers=headers, stream=True)
 print response.url
 print response.status_code
 
 for line in response.iter_lines():
 	if line:
-		print json.loads(line)
+		print json.loads(line)["text"]
 
