@@ -8,6 +8,16 @@ import base64
 import hashlib
 import binascii
 import requests
+import mysql.connector
+
+def connectsql():
+	
+	connection = mysql.connector.connect(user = "root",
+										 password = "",
+										 host = "127.0.0.1",
+										 database = "tweets")
+
+	return connection
 
 def urlencode(str):
 	return urllib.quote(str, '')
@@ -45,10 +55,11 @@ params = {\
 
 #payloads = {"track":keyword}
 #payloads = {"delimited":"length"}
+payloads = {"language":"en"}
 
 paramstr = ""
 
-#params.update(payloads)
+params.update(payloads)
 
 for key in sorted(params):
 	paramstr = paramstr + urlencode(key) + "=" + urlencode(params[key]) + "&"
@@ -74,12 +85,18 @@ authorization = "OAuth "\
 headers = {"authorization":authorization}
 
 #response = requests.post(url, data = payloads, headers = headers, stream = True)
-#response = requests.get(url, params = payloads, headers = headers, stream = True)
-response = requests.get(url, headers=headers, stream=True)
+response = requests.get(url, params = payloads, headers = headers, stream = True)
+#response = requests.get(url, headers=headers, stream=True)
 print response.url
 print response.status_code
 
+connection = connectsql()
+
+cursor = connection.cursor()
+
+#sql = ("INSERT INTO tweets VALUES ")
+
 for line in response.iter_lines():
 	if line:
-		print json.loads(line)["text"]
+		print "tweet : ", json.loads(line)["text"]
 
