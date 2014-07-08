@@ -110,7 +110,7 @@ for line in response.iter_lines():
 					tweet["retweet_count"],\
 					tweet["favorite_count"])
 
-		user = tweet[user]
+		user = tweet["user"]
 
 		u_fields = (user["id"],\
 					user["url"],\
