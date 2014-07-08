@@ -94,9 +94,44 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-#sql = ("INSERT INTO tweets VALUES ")
+t_sql = ("INSERT INTO tweets VALUES (%d, %s, %s, %s, %d, %d)")
+u_sql = ("INSERT INTO users VALUES (%d, %s, %s, %s, %s, %s, %s, %s, %s, %d, %d, %d, %d, %d)")
 
 for line in response.iter_lines():
+
 	if line:
-		print "tweet : ", json.loads(line)["text"]
+
+		tweet = json.loads(line)
+
+		t_fields = (tweet["id"],\ 
+					tweet["text"],\ 
+					tweet["source"],\ 
+					tweet["created_at"],\
+					tweet["retweet_count"],\
+					tweet["favorite_count"])
+
+		user = tweet[user]
+
+		u_fields = (user["id"],\
+					user["url"],\
+					user["description"],\
+					user["name"],\
+					user["screen_name"],\
+					user["lang"],\
+					user["location"],\
+					user["time_zone"],\
+					user["created_at"],\
+					user["favourites_count"],\
+					user["statuses_count"],\
+					user["listed_count"],\
+					user["friends_count"],\
+					user["followers_count"])
+
+		cursor.execute(t_sql, t_fields)
+		cursor.execute(u_sql, u_fields)
+
+		connection.commit()
+
+cursor.close()
+connection.close()
 
