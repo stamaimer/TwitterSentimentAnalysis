@@ -15,7 +15,7 @@ def connectsql():
 	connection = mysql.connector.connect(user = "root",
 										 password = "",
 										 host = "127.0.0.1",
-										 database = "tweets")
+										 database = "twitter")
 
 	return connection
 
@@ -103,9 +103,9 @@ for line in response.iter_lines():
 
 		tweet = json.loads(line)
 
-		t_fields = (tweet["id"],\ 
-					tweet["text"],\ 
-					tweet["source"],\ 
+		t_fields = (tweet["id"],\
+					tweet["text"],\
+					tweet["source"],\
 					tweet["created_at"],\
 					tweet["retweet_count"],\
 					tweet["favorite_count"])
