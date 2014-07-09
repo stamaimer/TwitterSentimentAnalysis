@@ -142,6 +142,8 @@ for line in response.iter_lines():
 																													  user["followers_count"]))
 		print u_sql
 
+		cursor.execute("set names utf8mb4")
+
 		cursor.execute(t_sql)
 		cursor.execute(u_sql)
 
