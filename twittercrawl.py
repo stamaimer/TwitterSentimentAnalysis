@@ -19,6 +19,17 @@ def connectsql():
 
 	return connection
 
+def to_html_escaped(str):
+
+	if str == None:
+
+		return str
+
+	else:
+
+		return re.sub("\"", "\\\"", str)
+
+
 def urlencode(str):
 	return urllib.quote(str, '')
 
@@ -102,10 +113,10 @@ for line in response.iter_lines():
 
 		t_sql = ("INSERT INTO tweets "\
 				 "(tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count) "\
-				 "VALUES (%d, \'%s\', \'%s\', \'%s\', %d, %d)" % (tweet["id"],\
-																  re.sub("'", "\\'", tweet["text"]),\
-																  re.sub("'", "\\'", tweet["source"]),\
-																  re.sub("'", "\\'", tweet["created_at"]),\
+				 "VALUES (%d, \"%s\", \"%s\", \"%s\", %d, %d)" % (tweet["id"],\
+																  to_html_escaped(tweet["text"]),\
+																  to_html_escaped(tweet["source"]),\
+																  to_html_escaped(tweet["created_at"]),\
 																  tweet["retweet_count"],\
 																  tweet["favorite_count"]))
 
@@ -115,15 +126,15 @@ for line in response.iter_lines():
 
 		u_sql = ("INSERT INTO users "\
 				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_time, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\
-				 "VALUES (%d, \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', %d, %d, %d, %d, %d)" % (user["id"],\
-																													  re.sub("'", "\\'", user["url"]),\
-																													  re.sub("'", "\\'", user["description"]),\
-																													  re.sub("'", "\\'", user["name"]),\
-																													  re.sub("'", "\\'", user["screen_name"]),\
-																													  re.sub("'", "\\'", user["lang"]),\
-																													  re.sub("'", "\\'", user["location"]),\
-																													  re.sub("'", "\\'", user["time_zone"]),\
-																													  re.sub("'", "\\'", user["created_at"]),\
+				 "VALUES (%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d)" % (user["id"],\
+																													  to_html_escaped(user["url"]),\
+																													  to_html_escaped(user["description"]),\
+																													  to_html_escaped(user["name"]),\
+																													  to_html_escaped(user["screen_name"]),\
+																													  to_html_escaped(user["lang"]),\
+																													  to_html_escaped(user["location"]),\
+																													  to_html_escaped(user["time_zone"]),\
+																													  to_html_escaped(user["created_at"]),\
 																													  user["favourites_count"],\
 																													  user["statuses_count"],\
 																													  user["listed_count"],\
