@@ -27,9 +27,9 @@ def to_html_escaped(str):
 
 	else:
 
-		tmp = re.sub("\"", "\\\"", str)
+		tmp = re.sub(r"\\", r"\\\\", str)
 
-		return re.sub("\\", "\\\\", tmp)
+		return re.sub("\"", "\\\"", tmp)
 
 
 def urlencode(str):
