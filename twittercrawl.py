@@ -94,41 +94,45 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-t_sql = ("INSERT INTO tweets VALUES (%d, %s, %s, %s, %d, %d)")
-u_sql = ("INSERT INTO users VALUES (%d, %s, %s, %s, %s, %s, %s, %s, %s, %d, %d, %d, %d, %d)")
-
 for line in response.iter_lines():
 
 	if line:
 
 		tweet = json.loads(line)
 
-		t_fields = (tweet["id"],\
-					tweet["text"],\
-					tweet["source"],\
-					tweet["created_at"],\
-					tweet["retweet_count"],\
-					tweet["favorite_count"])
+		t_sql = ("INSERT INTO tweets "\
+				 "(tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count)"\
+				 "VALUES (%d, \"%s\", \'%s\', \'%s\', %d, %d)" % (tweet["id"],\
+																  tweet["text"],\
+																  tweet["source"],\
+																  tweet["created_at"],\
+																  tweet["retweet_count"],\
+																  tweet["favorite_count"]))
+
+		print t_sql
 
 		user = tweet["user"]
 
-		u_fields = (user["id"],\
-					user["url"],\
-					user["description"],\
-					user["name"],\
-					user["screen_name"],\
-					user["lang"],\
-					user["location"],\
-					user["time_zone"],\
-					user["created_at"],\
-					user["favourites_count"],\
-					user["statuses_count"],\
-					user["listed_count"],\
-					user["friends_count"],\
-					user["followers_count"])
+		u_sql = ("INSERT INTO users "\
+				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_time, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count)"\
+				 "VALUES (%d, \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', %d, %d, %d, %d, %d)" % (user["id"],\
+																													  user["url"],\
+																													  user["description"],\
+																													  user["name"],\
+																													  user["screen_name"],\
+																													  user["lang"],\
+																													  user["location"],\
+																													  user["time_zone"],\
+																													  user["created_at"],\
+																													  user["favourites_count"],\
+																													  user["statuses_count"],\
+																													  user["listed_count"],\
+																													  user["friends_count"],\
+																													  user["followers_count"]))
+		print u_sql
 
-		cursor.execute(t_sql, t_fields)
-		cursor.execute(u_sql, u_fields)
+		cursor.execute(t_sql)
+		cursor.execute(u_sql)
 
 		connection.commit()
 
