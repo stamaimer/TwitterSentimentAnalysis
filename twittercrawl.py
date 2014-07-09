@@ -101,11 +101,11 @@ for line in response.iter_lines():
 		tweet = json.loads(line)
 
 		t_sql = ("INSERT INTO tweets "\
-				 "(tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count)"\
-				 "VALUES (%d, \"%s\", \'%s\', \'%s\', %d, %d)" % (tweet["id"],\
-																  tweet["text"],\
-																  tweet["source"],\
-																  tweet["created_at"],\
+				 "(tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count) "\
+				 "VALUES (%d, \'%s\', \'%s\', \'%s\', %d, %d)" % (tweet["id"],\
+																  re.sub("'", "\\'", tweet["text"]),\
+																  re.sub("'", "\\'", tweet["source"]),\
+																  re.sub("'", "\\'", tweet["created_at"]),\
 																  tweet["retweet_count"],\
 																  tweet["favorite_count"]))
 
@@ -114,16 +114,16 @@ for line in response.iter_lines():
 		user = tweet["user"]
 
 		u_sql = ("INSERT INTO users "\
-				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_time, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count)"\
+				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_time, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\
 				 "VALUES (%d, \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', %d, %d, %d, %d, %d)" % (user["id"],\
-																													  user["url"],\
-																													  user["description"],\
-																													  user["name"],\
-																													  user["screen_name"],\
-																													  user["lang"],\
-																													  user["location"],\
-																													  user["time_zone"],\
-																													  user["created_at"],\
+																													  re.sub("'", "\\'", user["url"]),\
+																													  re.sub("'", "\\'", user["description"]),\
+																													  re.sub("'", "\\'", user["name"]),\
+																													  re.sub("'", "\\'", user["screen_name"]),\
+																													  re.sub("'", "\\'", user["lang"]),\
+																													  re.sub("'", "\\'", user["location"]),\
+																													  re.sub("'", "\\'", user["time_zone"]),\
+																													  re.sub("'", "\\'", user["created_at"]),\
 																													  user["favourites_count"],\
 																													  user["statuses_count"],\
 																													  user["listed_count"],\
