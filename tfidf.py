@@ -13,7 +13,7 @@ def prepare(path2corpus):
 
 	for file in files:
 
-		filelist = [term for term in open(file, 'r').read(-1).split()]
+		filelist = [term.lower() for term in open(file, 'r').read(-1).split()]
 
 		filelists.append(nltk.Text(filelist))
 
