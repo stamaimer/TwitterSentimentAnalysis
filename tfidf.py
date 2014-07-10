@@ -23,7 +23,7 @@ def cal_term_freq(text):
 
 	text = re.sub('[\W]', ' ', text)
 
-	terms    = [term for term in text.split()]
+	terms    = [term.lower() for term in text.split()]
 
 	length   = len(terms)
 
