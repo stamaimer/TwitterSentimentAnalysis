@@ -5,22 +5,9 @@ import sys
 import math
 import nltk
 
-stop_words = nltk.corpus.stopwords.words('english') + [
-														'.',
-														',',
-														'?',
-														'(',
-														')',
-														':',
-														'"',
-														'-',
-														'{',
-														"}",
-														'\'',	
-														'--',
-														'\'s',
-														'\'re'
-													  ]
+#stop_words = nltk.corpus.stopwords.words('english') + ['.', ',', '?', '(', ')', ':', '"', '-', '{', '}', '\'',	'--', '\'s', '\'re']
+
+pos = ('JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'RB', 'RBR', 'RBS', 'RP', 'SYM', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ')
 
 def prepare(path2corpus):
 	
@@ -84,9 +71,21 @@ for key in term_freq.keys():
 
 	tfidf[key] = term_freq[key] * idoc_freq[key]
 
-tmp = sorted(tfidf, key = tfidf.get)
+tmp = sorted(tfidf, key = tfidf.get)		#sort by tfidf
 
-print tmp[:-5]
+tmp = [[term] for term in tmp]				#pre-process
+
+tmp = [nltk.pos_tag(term) for term in tmp]	#tagged
+
+final = []
+
+for term in tmp:
+
+	if term[0][1] in pos:
+
+		final.append(term)
+
+print final[-10:]
 
 
 
