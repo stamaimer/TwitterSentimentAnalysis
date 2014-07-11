@@ -41,11 +41,11 @@ def timestamp():
 def gen_nonce():
 	return re.sub('[\W_]', '', 	base64.b64encode(os.urandom(32)))
 
-#url = "https://stream.twitter.com/1.1/statuses/filter.json"
-url = "https://stream.twitter.com/1.1/statuses/sample.json"
+url = "https://stream.twitter.com/1.1/statuses/filter.json"
+#url = "https://stream.twitter.com/1.1/statuses/sample.json"
 #url = "https://stream.twitter.com/1.1/statuses/firehose.json"
 
-#keyword  = "Confucius Institute"
+keyword  = "Confucius Institute"
 
 secrets = {\
 		   "consumer_secret":"oFAlNZr6JGHwCdYGrYNfS3plUSdxg8UlEP2RtiKg59uSYahWRk",\
@@ -67,8 +67,9 @@ params = {\
 		 }
 
 #payloads = {"track":keyword}
+payloads = {"track":keyword, "language":"en"}
 #payloads = {"delimited":"length"}
-payloads = {"language":"en"}
+#payloads = {"language":"en"}
 
 paramstr = ""
 
@@ -79,8 +80,8 @@ for key in sorted(params):
 
 paramstr = paramstr[:-1]
 
-#basestr = "POST&" + urlencode(url) + "&" + urlencode(paramstr)
-basestr = "GET&" + urlencode(url) + "&" + urlencode(paramstr)
+basestr = "POST&" + urlencode(url) + "&" + urlencode(paramstr)
+#basestr = "GET&" + urlencode(url) + "&" + urlencode(paramstr)
 
 digest = hmac.new(signkey, basestr, hashlib.sha1).digest()
 
@@ -97,8 +98,8 @@ authorization = "OAuth "\
 
 headers = {"authorization":authorization}
 
-#response = requests.post(url, data = payloads, headers = headers, stream = True)
-response = requests.get(url, params = payloads, headers = headers, stream = True)
+response = requests.post(url, data = payloads, headers = headers, stream = True)
+#response = requests.get(url, params = payloads, headers = headers, stream = True)
 #response = requests.get(url, headers=headers, stream=True)
 print response.url
 print response.status_code

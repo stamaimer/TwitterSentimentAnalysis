@@ -5,6 +5,23 @@ import sys
 import math
 import nltk
 
+stop_words = nltk.corpus.stopwords.words('english') + [
+														'.',
+														',',
+														'?',
+														'(',
+														')',
+														':',
+														'"',
+														'-',
+														'{',
+														"}",
+														'\'',	
+														'--',
+														'\'s',
+														'\'re'
+													  ]
+
 def prepare(path2corpus):
 	
 	files = os.listdir(path2corpus)
@@ -21,9 +38,11 @@ def prepare(path2corpus):
 
 def cal_term_freq(text):
 
-	text = re.sub('[\W]', ' ', text)
+#	text = re.sub('[\W]', ' ', text)
 
-	terms    = [term.lower() for term in text.split()]
+	sentences = nltk.tokenize.sent_tokenize(text)
+
+	terms    = [term.lower() for sentence in sentences for term in nltk.tokenize.word_tokenize(sentence)]
 
 	length   = len(terms)
 
@@ -65,7 +84,9 @@ for key in term_freq.keys():
 
 	tfidf[key] = term_freq[key] * idoc_freq[key]
 
-print tfidf.keys()[:10]
+tmp = sorted(tfidf, key = tfidf.get)
+
+print tmp[:-5]
 
 
 
