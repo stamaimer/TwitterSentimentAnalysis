@@ -5,7 +5,7 @@ import sys
 import math
 import nltk
 
-#stop_words = nltk.corpus.stopwords.words('english') + ['.', ',', '?', '(', ')', ':', '"', '-', '{', '}', '\'',	'--', '\'s', '\'re']
+stopwords = nltk.corpus.stopwords.words('english') + ['.', ',', '?', '(', ')', ':', '"', '-', '{', '}', '\'',	'--', '\'s', '\'re']
 
 pos = ('JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'RB', 'RBR', 'RBS', 'RP', 'SYM', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ')
 
@@ -17,15 +17,13 @@ def prepare(path2corpus):
 
 	for file in files:
 
-		filelist = [term.lower() for term in open(file, 'r').read(-1).split()]
+		filelist = [term.lower() for term in open(('/').join([path2corpus, file]), 'r').read(-1).split()]
 
 		filelists.append(nltk.Text(filelist))
 
 	return filelists
 
 def cal_term_freq(text):
-
-#	text = re.sub('[\W]', ' ', text)
 
 	sentences = nltk.tokenize.sent_tokenize(text)
 
@@ -37,7 +35,13 @@ def cal_term_freq(text):
 
 	for key in freqdist.keys():
 
-		freqdist[key] = freqdist[key] / length
+		if key in stopwords:						#del stop words
+			
+			del freqdist[key]
+
+		else:
+
+			freqdist[key] = freqdist[key] / length
 
 	return freqdist
 
@@ -59,33 +63,38 @@ def cal_idoc_freq(dist2cal, path2corpus):
 
 	return dist2cal
 
-file = open(sys.argv[1], 'r')
+def gen_keywords(text, path2corpus, n):
+	
+	term_freq = cal_term_freq(text)
 
-term_freq = cal_term_freq(file.read(-1))
+	idoc_freq = cal_idoc_freq(term_freq, path2corpus)
 
-idoc_freq = cal_idoc_freq(term_freq, sys.argv[2])
+	tfidf = {}
 
-tfidf = {}
+	for key in term_freq.keys():
 
-for key in term_freq.keys():
+		tfidf[key] = term_freq[key] * idoc_freq[key]
 
-	tfidf[key] = term_freq[key] * idoc_freq[key]
+	tmp = sorted(tfidf, key = tfidf.get)				#sort by tfidf
 
-tmp = sorted(tfidf, key = tfidf.get)		#sort by tfidf
+	tmp = [[term] for term in tmp]						#pre-process
 
-tmp = [[term] for term in tmp]				#pre-process
+	tmp = [nltk.pos_tag(term) for term in tmp]			#tegged
 
-tmp = [nltk.pos_tag(term) for term in tmp]	#tagged
+	keywords = []
 
-final = []
+	for term in tmp:
 
-for term in tmp:
+		if term[0][1] in pos:
 
-	if term[0][1] in pos:
+			keywords.append(term)
 
-		final.append(term)
+	return keywords[-int(n):]
 
-print final[-10:]
+print gen_keywords(open(sys.argv[1], 'r').read(), sys.argv[2], sys.argv[3])
+
+
+
 
 
 
