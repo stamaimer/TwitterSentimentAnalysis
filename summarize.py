@@ -5,11 +5,12 @@ import numpy
 import tfidf
 
 N = 100 				# number of words yto consider
+TOP_SENTENCES = 5		# number of sentences to return for a "top n" summary
 CLUSTER_THRESHOLD = 5 	# distance between words to considers
 
 # approach taken from "The Automatic Creation of Literature Abstracts" by H.P. Luhn
 
-def placeholder(sentences, keywords):
+def cal_sents_score(sentences, keywords):
 
 	scores = []
 
@@ -80,9 +81,30 @@ def summarize(text, path2corpus):
 	
 	keywords  = tfidf.gen_keywords(text, path2corpus, N)
 
+	keywords  = [element[0] for element in keywords]
+
 	sentences = [sentence.lower() for sentence in nltk.tokenize.sent_tokenize(text)]
 
-	sentences = placeholder(sentences, keywords)
+	scored_sents = cal_sents_score(sentences, keywords)
 
-	
+	avg = numpy.mean([element[1] for element in scored_sents])
+	std = numpy.std([element[1] for element in scored_sents])
+
+	mean_sents = [(sent_idx, score) for (sent_idx, score) in scored_sents if score > avg + 0.5 * std]
+
+	top_n_sents = sorted(scored_sents, key = lambda sentence : sentence[1])[-TOP_SENTENCES:]
+	top_n_sents = sorted(top_n_sents, key = lambda sentence : sentence[0])
+
+	return dict(top_n_summary = [sentences[idx] for (idx, score) in top_n_sents],
+				mean_summary = [sentences[idx] for (idx, score) in mean_sents])
+
+result = summarize(open(sys.argv[1], 'r').read(), sys.argv[2])
+
+print "top_n_summary\n"
+print ' '.join(result["top_n_summary"])
+print "mean_summary\n"
+print ' '.join(result["mean_summary"])
+
+
+
 
