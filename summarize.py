@@ -81,7 +81,7 @@ def summarize(text, path2corpus):
 	
 	keywords  = tfidf.gen_keywords(text, path2corpus, N)
 
-	keywords  = [element[0] for element in keywords]
+	keywords  = [element[0][0] for element in keywords]
 
 	sentences = [sentence.lower() for sentence in nltk.tokenize.sent_tokenize(text)]
 
@@ -96,7 +96,7 @@ def summarize(text, path2corpus):
 	top_n_sents = sorted(top_n_sents, key = lambda sentence : sentence[0])
 
 	return dict(top_n_summary = [sentences[idx] for (idx, score) in top_n_sents],
-				mean_summary = [sentences[idx] for (idx, score) in mean_sents])
+	 			mean_summary = [sentences[idx] for (idx, score) in mean_sents])
 
 result = summarize(open(sys.argv[1], 'r').read(), sys.argv[2])
 

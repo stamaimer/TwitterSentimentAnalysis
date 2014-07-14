@@ -91,7 +91,7 @@ def gen_keywords(text, path2corpus, n):
 
 	return keywords[-int(n):]
 
-print gen_keywords(open(sys.argv[1], 'r').read(), sys.argv[2], sys.argv[3])
+#print gen_keywords(open(sys.argv[1], 'r').read(), sys.argv[2], sys.argv[3])
 
 
 
