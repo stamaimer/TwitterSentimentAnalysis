@@ -85,6 +85,12 @@ def summarize(text, path2corpus):
 
 	sentences = [sentence.lower() for sentence in nltk.tokenize.sent_tokenize(text)]
 
+	words = [word.lower() for sentence in sentences for word in nltk.tokenize.word_tokenize(sentence)]
+
+	freq_dist = nltk.FreqDist(words)
+
+	top_freq_words = [word[0] for word in freq_dist.items() if word[0] not in nltk.corpus.stopwords.words('english')][:N]
+
 	scored_sents = cal_sents_score(sentences, keywords)
 
 	avg = numpy.mean([element[1] for element in scored_sents])
