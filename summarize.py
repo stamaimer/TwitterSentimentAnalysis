@@ -98,16 +98,17 @@ def summarize(text, path2corpus):
 
 	mean_sents = [(sent_idx, score) for (sent_idx, score) in scored_sents if score > avg + 0.5 * std]
 
-	top_n_sents = sorted(scored_sents, key = lambda sentence : sentence[1])[-TOP_SENTENCES:]
-	top_n_sents = sorted(top_n_sents, key = lambda sentence : sentence[0])
+	# top_n_sents = sorted(scored_sents, key = lambda sentence : sentence[1])[-TOP_SENTENCES:]
+	# top_n_sents = sorted(top_n_sents, key = lambda sentence : sentence[0])
 
-	return dict(top_n_summary = [sentences[idx] for (idx, score) in top_n_sents],
+	return dict(#top_n_summary = [sentences[idx] for (idx, score) in top_n_sents],
 	 			mean_summary = [sentences[idx] for (idx, score) in mean_sents])
 
 result = summarize(open(sys.argv[1], 'r').read(), sys.argv[2])
 
-print "top_n_summary\n"
-print ' '.join(result["top_n_summary"])
+# print "top_n_summary\n"
+# print ' '.join(result["top_n_summary"])
+# print
 print "mean_summary\n"
 print ' '.join(result["mean_summary"])
 
