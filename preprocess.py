@@ -1,3 +1,4 @@
+import re
 import nltk
 import twitter_text
 import mysql.connector
@@ -26,8 +27,6 @@ for(id, text) in cursor:
 
 	for ele in extractor.extract_urls_with_indices():
 
-		
+		text = re.sub(ele['url'], '', text)
 
-	
-
-
+	print text
