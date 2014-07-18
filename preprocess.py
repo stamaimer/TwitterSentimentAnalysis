@@ -17,16 +17,20 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM tweets WHERE tweet_id = 486789001287045120"
+sql = "SELECT tweet_id, tweet_text FROM tweets"
 
 cursor.execute(sql)
 
 for(id, text) in cursor:
+
+	print text
 
 	extractor = TwitterText(text).extractor
 
 	for ele in extractor.extract_urls_with_indices():
 
 		text = re.sub(ele['url'], '', text)
+
+	text = re.sub('RT @.+:', '', text)
 
 	print text
