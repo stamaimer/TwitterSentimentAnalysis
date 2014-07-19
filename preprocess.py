@@ -17,7 +17,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 10, 20"
+sql = "SELECT tweet_id, tweet_text FROM tweets"
 
 cursor.execute(sql)
 
@@ -33,12 +33,12 @@ for(id, text) in cursor:
 
 	text += ' '
 
-	text = re.sub('RT', ' ', text)
+	text = re.sub('\bRT\b', ' ', text)
 
 	text = re.sub('&amp;', ' ', text)
 
 	text = re.sub('@.*?[: ]', ' ', text)
 
-	text = re.sub('[][#|.,!/?]', ' ', text)
+	text = re.sub('[][#|.,!/?"]', ' ', text)
 
 	print text
