@@ -1,4 +1,5 @@
 import re
+import sys
 import nltk
 import twitter_text
 import mysql.connector
@@ -20,6 +21,10 @@ cursor = connection.cursor()
 sql = "SELECT tweet_id, tweet_text FROM tweets"
 
 cursor.execute(sql)
+
+file = open('output.txt', 'w')
+
+sys.stdout = file
 
 for(id, text) in cursor:
 
