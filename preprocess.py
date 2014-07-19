@@ -31,12 +31,14 @@ for(id, text) in cursor:
 
 		text = re.sub(ele['url'], '', text)
 
-	text = re.sub('RT @.*?[: ]', '', text)
+	text += ' '
 
-	text = re.sub('@.*?', '', text)
+	text = re.sub('RT', ' ', text)
 
-	text = re.sub('[][!"#$%&*+,./;<=>?@\^_`{|}~-]', ' ', text)
+	text = re.sub('&amp;', ' ', text)
 
-	text = re.sub('\'', '', text)
+	text = re.sub('@.*?[: ]', ' ', text)
+
+	text = re.sub('[][#|.,!/?]', ' ', text)
 
 	print text
