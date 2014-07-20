@@ -20,6 +20,10 @@ def connectsql():
 
 	return connection
 
+def none2int(var):
+	
+	return int(0 if var is None else var)
+
 def to_html_escaped(str):
 
 	if str == None:
@@ -123,8 +127,8 @@ for line in response.iter_lines():
 																  to_html_escaped(tweet["text"]),\
 																  to_html_escaped(tweet["source"]),\
 																  to_html_escaped(tweet["created_at"]),\
-																  tweet["retweet_count"],\
-																  tweet["favorite_count"]))
+																  none2int(tweet["retweet_count"]),\
+																  none2int(tweet["favorite_count"])))
 
 		print t_sql
 
@@ -141,11 +145,11 @@ for line in response.iter_lines():
 																													  to_html_escaped(user["location"]),\
 																													  to_html_escaped(user["time_zone"]),\
 																													  to_html_escaped(user["created_at"]),\
-																													  user["favourites_count"],\
-																													  user["statuses_count"],\
-																													  user["listed_count"],\
-																													  user["friends_count"],\
-																													  user["followers_count"]))
+																													  none2int(user["favourites_count"]),\
+																													  none2int(user["statuses_count"]),\
+																													  none2int(user["listed_count"]),\
+																													  none2int(user["friends_count"]),\
+																													  none2int(user["followers_count"])))
 		print u_sql
 
 		cursor.execute("set names utf8mb4")
