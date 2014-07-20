@@ -14,22 +14,8 @@ def connectsql():
 
 	return connection
 
-connection = connectsql()
-
-cursor = connection.cursor()
-
-sql = "SELECT tweet_id, tweet_text FROM tweets"
-
-cursor.execute(sql)
-
-file = open('output.txt', 'w')
-
-sys.stdout = file
-
-for(id, text) in cursor:
-
-	print text
-
+def pre_process(text):
+	
 	extractor = TwitterText(text).extractor
 
 	for ele in extractor.extract_urls_with_indices():
@@ -46,4 +32,28 @@ for(id, text) in cursor:
 
 	text = re.sub('[][#|.,!/?"]', ' ', text)
 
+	return text
+
+connection = connectsql()
+
+cursor = connection.cursor()
+
+sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 0, 10"
+
+cursor.execute(sql)
+
+for(id, text) in cursor:
+
 	print text
+
+	text = pre_process(text)
+
+	print text
+
+	print [term for term in text.split()]
+
+	print nltk.bigrams(text.split())
+
+
+	
+
