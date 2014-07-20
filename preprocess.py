@@ -4,6 +4,9 @@ import nltk
 import twitter_text
 import mysql.connector
 from twitter_text import TwitterText
+from nltk.stem.wordnet import WordNetLemmatizer
+
+stopwords = nltk.corpus.stopwords.words('english') + ['-']	#
 
 def connectsql():
 	
@@ -34,25 +37,60 @@ def pre_process(text):
 
 	return text
 
+def del_stopwords(terms):
+	
+	for term in terms:
+
+		if term in stopwords:
+
+			terms.remove(term)
+
+	return terms
+
+def lemmatize(terms):
+
+	lmtzr = WordNetLemmatizer()
+	
+	for i in range(len(terms)):
+
+		terms[i] = lmtzr.lemmatize(terms[i])
+
+	return terms
+
 connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 0, 10"
+sql = "SELECT tweet_id, tweet_text FROM tweets"
 
 cursor.execute(sql)
 
 for(id, text) in cursor:
 
-	print text
+	# print text
 
 	text = pre_process(text)
 
-	print text
+	# print text
 
-	print [term for term in text.split()]
+	terms = [term for term in text.split()]
 
-	print nltk.bigrams(text.split())
+	# print terms
+
+	# bigrams = nltk.bigrams(text.split())
+
+	# print bigrams
+
+	terms = del_stopwords(terms)
+
+	# print terms
+
+	terms = lemmatize(terms)
+
+	print terms
+
+
+
 
 
 	
