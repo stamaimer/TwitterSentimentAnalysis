@@ -33,7 +33,7 @@ def pre_process(text):
 
 	text = re.sub('@.*?[: ]', ' ', text)
 
-	text = re.sub('[][#|.,!/?"]', ' ', text)
+	text = re.sub('[][#|.,!/?*_+"]', ' ', text)
 
 	return text
 
