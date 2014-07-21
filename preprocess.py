@@ -65,7 +65,9 @@ sql = "SELECT tweet_id, tweet_text FROM tweets"
 
 cursor.execute(sql)
 
-for(id, text) in cursor:
+results = cursor.fetchall()
+
+for(id, text) in results:
 
 	# print text
 
@@ -87,7 +89,11 @@ for(id, text) in cursor:
 
 	terms = lemmatize(terms)
 
-	print terms
+	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(terms), id)
+
+	print sql
+
+	cursor.execute(sql)
 
 
 
