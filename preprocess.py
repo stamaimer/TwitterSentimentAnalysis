@@ -89,7 +89,11 @@ for(id, text) in results:
 
 	terms = lemmatize(terms)
 
-	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(terms), id)
+	keywords  = tfidf.gen_keywords(' '.join(terms), './corpus', 5)
+
+	print keywords
+
+	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
 
 	cursor.execute(sql)
 
