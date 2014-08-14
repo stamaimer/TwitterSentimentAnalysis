@@ -1,6 +1,7 @@
 import re
 import sys
 import nltk
+import tfidf
 import twitter_text
 import mysql.connector
 from twitter_text import TwitterText
@@ -61,7 +62,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM tweets"
+sql = "SELECT tweet_id, tweet_text FROM test"
 
 cursor.execute(sql)
 
@@ -92,6 +93,8 @@ for(id, text) in results:
 	keywords  = tfidf.gen_keywords(' '.join(terms), './corpus', 5)
 
 	print keywords
+
+	
 
 	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
 
