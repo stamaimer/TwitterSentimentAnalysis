@@ -94,7 +94,9 @@ for(id, text) in results:
 
 	print keywords
 
-	
+	for i in range(5):
+
+		keywords[i] = keywords[i][0][0]
 
 	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
 
