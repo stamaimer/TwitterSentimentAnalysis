@@ -7,7 +7,7 @@ import mysql.connector
 from twitter_text import TwitterText
 from nltk.stem.wordnet import WordNetLemmatizer
 
-stopwords = nltk.corpus.stopwords.words('english') + ['-']	#
+stopwords = nltk.corpus.stopwords.words('english') + ['-', '\\']	#
 
 def connectsql():
 	
@@ -62,7 +62,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM test"
+sql = "SELECT tweet_id, tweet_text FROM test LIMIT 0, 2500"
 
 cursor.execute(sql)
 
@@ -92,13 +92,17 @@ for(id, text) in results:
 
 	keywords  = tfidf.gen_keywords(' '.join(terms), './corpus', 5)
 
-	print keywords
+	# print keywords
 
-	for i in range(5):
+	for i in range(len(keywords)):
 
 		keywords[i] = keywords[i][0][0]
 
-	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
+		# print keywords[i]
+
+	print ' '.join(keywords)
+
+	sql = "UPDATE test SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
 
 	cursor.execute(sql)
 
