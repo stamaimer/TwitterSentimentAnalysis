@@ -62,7 +62,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM test LIMIT 0, 2500"
+sql = "SELECT tweet_id, tweet_text FROM test LIMIT 0, 4"
 
 cursor.execute(sql)
 
@@ -100,9 +100,11 @@ for(id, text) in results:
 
 		# print keywords[i]
 
-	print ' '.join(keywords)
+	# print ' '.join(keywords)
 
 	sql = "UPDATE test SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
+
+	print sql
 
 	cursor.execute(sql)
 
