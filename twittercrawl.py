@@ -121,9 +121,12 @@ for line in response.iter_lines():
 
 		tweet = json.loads(line)
 
+		user = tweet["user"]
+
 		t_sql = ("INSERT INTO tweets "\
-				 "(tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count) "\
-				 "VALUES (%d, \"%s\", \"%s\", \"%s\", %d, %d)" % (tweet["id"],\
+				 "(user_id, tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count) "\
+				 "VALUES (%d, %d, \"%s\", \"%s\", \"%s\", %d, %d)" % (user["id"],\
+				 												  tweet["id"],\
 																  to_html_escaped(tweet["text"]),\
 																  to_html_escaped(tweet["source"]),\
 																  to_html_escaped(tweet["created_at"]),\
@@ -131,8 +134,6 @@ for line in response.iter_lines():
 																  none2int(tweet["favorite_count"])))
 
 		print t_sql
-
-		user = tweet["user"]
 
 		u_sql = ("INSERT INTO users "\
 				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_time, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\

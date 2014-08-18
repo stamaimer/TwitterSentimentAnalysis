@@ -2,6 +2,7 @@ import re
 import sys
 import nltk
 import tfidf
+import codecs
 import twitter_text
 import mysql.connector
 from twitter_text import TwitterText
@@ -62,11 +63,13 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 0, 4"
+sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 1285, 2501"
 
 cursor.execute(sql)
 
 results = cursor.fetchall()
+
+file = codecs.open('./output', 'a', 'utf-8')
 
 for(id, text) in results:
 
@@ -100,13 +103,18 @@ for(id, text) in results:
 
 		# print keywords[i]
 
-	# print ' '.join(keywords)
+	print ' '.join(keywords)
 
-	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(terms), id)
+	file.write(' '.join(keywords))
+	file.write("\r\n")
 
-	print sql
+	# sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(terms), id)
 
-	cursor.execute(sql)
+	# print sql
+
+	# cursor.execute(sql)
+
+file.close()
 
 
 
