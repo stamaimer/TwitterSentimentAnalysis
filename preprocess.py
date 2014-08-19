@@ -63,58 +63,39 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 1285, 2501"
+sql = "SELECT tweet_id, tweet_text FROM tweets LIMIT 0, 2500"
 
 cursor.execute(sql)
 
 results = cursor.fetchall()
 
-file = codecs.open('./output', 'a', 'utf-8')
-
 for(id, text) in results:
-
-	# print text
 
 	text = pre_process(text)
 
-	# print text
-
 	terms = [term for term in text.split()]
-
-	# print terms
 
 	# bigrams = nltk.bigrams(text.split())
 
-	# print bigrams
-
 	terms = del_stopwords(terms)
-
-	# print terms
 
 	terms = lemmatize(terms)
 
 	keywords  = tfidf.gen_keywords(' '.join(terms), './corpus', 5)
 
-	# print keywords
-
 	for i in range(len(keywords)):
 
 		keywords[i] = keywords[i][0][0]
 
-		# print keywords[i]
-
 	print ' '.join(keywords)
 
-	file.write(' '.join(keywords))
-	file.write("\r\n")
-
-	# sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(terms), id)
+	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
 
 	# print sql
 
-	# cursor.execute(sql)
+	cursor.execute(sql)
 
-file.close()
+	connection.commit()
 
 
 
