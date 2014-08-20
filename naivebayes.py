@@ -19,7 +19,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 2400"
+sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 500, 2400"
 
 cursor.execute(sql)
 
@@ -29,9 +29,11 @@ trainsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, 
 
 classifier = nltk.NaiveBayesClassifier.train(trainsets)
 
-for i in range(6):
+for i in range(10):
 
-	sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT %d, %d" % (400 * i, 400 * (i + 1))
+	# sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT %d, %d" % (400 * i, 400 * (i + 1))
+
+	sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets WHERE (id >= 0) AND (id <= 500) ORDER BY RAND() LIMIT 400"
 
 	cursor.execute(sql)
 
@@ -50,7 +52,7 @@ for i in range(6):
 
 		tset[temp].add(n)
 
-	print nltk.classify.accuracy(classifier, testsets)
+	print "accuracy of classifier : ", myround(nltk.classify.accuracy(classifier, testsets)), "\n"
 
 	print "precision of 0 : ", myround(nltk.metrics.precision(rset[0], tset[0])), "\trecall of 0 : ", myround(nltk.metrics.recall(rset[0], tset[0])), "\tf_measure of 0 : ", myround(nltk.metrics.f_measure(rset[0], tset[0]))
 	print "precision of 1 : ", myround(nltk.metrics.precision(rset[1], tset[1])), "\trecall of 1 : ", myround(nltk.metrics.recall(rset[1], tset[1])), "\tf_measure of 1 : ", myround(nltk.metrics.f_measure(rset[1], tset[1]))
