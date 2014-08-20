@@ -20,6 +20,10 @@ def connectsql():
 
 	return connection
 
+def booltoint(var):
+
+	return 1 if var else 0
+
 def none2int(var):
 	
 	return int(0 if var is None else var)
@@ -124,14 +128,15 @@ for line in response.iter_lines():
 		user = tweet["user"]
 
 		t_sql = ("INSERT INTO tweets "\
-				 "(user_id, tweet_id, tweet_text, tweet_source, tweet_created_time, tweet_retweet_count, tweet_favorite_count) "\
-				 "VALUES (%d, %d, \"%s\", \"%s\", \"%s\", %d, %d)" % (user["id"],\
-				 												  tweet["id"],\
-																  to_html_escaped(tweet["text"]),\
-																  to_html_escaped(tweet["source"]),\
-																  to_html_escaped(tweet["created_at"]),\
-																  none2int(tweet["retweet_count"]),\
-																  none2int(tweet["favorite_count"])))
+				 "(user_id, tweet_id, tweet_text, tweet_source, tweet_truncated, tweet_created_at, tweet_retweet_count, tweet_favorite_count) "\
+				 "VALUES (%d, %d, \"%s\", \"%s\", %d, \"%s\", %d, %d)" % (user["id"],\
+				 												  		  tweet["id"],\
+																  		  to_html_escaped(tweet["text"]),\
+																  		  to_html_escaped(tweet["source"]),\
+																  		  booltoint(tweet["truncated"]),\
+																  		  to_html_escaped(tweet["created_at"]),\
+																  		  none2int(tweet["retweet_count"]),\
+																  		  none2int(tweet["favorite_count"])))
 
 		print t_sql
 
