@@ -19,38 +19,48 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 500, 2400"
+for i in range(6):
 
-cursor.execute(sql)
-
-records = cursor.fetchall()
-
-trainsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records]
-
-classifier = nltk.NaiveBayesClassifier.train(trainsets)
-
-for i in range(10):
-
-	# sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT %d, %d" % (400 * i, 400 * (i + 1))
-
-	sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets WHERE (id >= 0) AND (id <= 500) ORDER BY RAND() LIMIT 400"
+	sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 2400"
 
 	cursor.execute(sql)
 
 	records = cursor.fetchall()
 
-	testsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records]
+	print "length of tweets : ", len(records)
+
+	print "range of testset : ", 400 * i, 400 * (i + 1)
+
+	testsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records[400 * i : 400 * (i + 1)]]
+
+	# for index in range(400 * i, 400 * (i + 1)):
+
+	del records[400 * i : 400 * (i + 1)]
+
+	trainsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records]
+
+	classifier = nltk.NaiveBayesClassifier.train(trainsets)
+
+	# sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT %d, %d" % (400 * i, 400 * (i + 1))
+
+	# sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets WHERE (id >= ) AND (id <= ) ORDER BY RAND() LIMIT 400"
+
+	# cursor.execute(sql)
+
+	# records = cursor.fetchall()
+	
+	# testsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records]
 
 	rset = collections.defaultdict(set)
 	tset = collections.defaultdict(set)
-
+	
 	for n, (feature, classification) in enumerate(testsets):
 
-		rset[classification].add(n)
+			rset[classification].add(n)
 
-		temp = classifier.classify(feature)
+			temp = classifier.classify(feature)
 
-		tset[temp].add(n)
+			tset[temp].add(n)
 
 	print "accuracy of classifier : ", myround(nltk.classify.accuracy(classifier, testsets)), "\n"
 

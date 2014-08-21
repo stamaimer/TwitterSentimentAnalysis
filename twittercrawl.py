@@ -141,7 +141,7 @@ for line in response.iter_lines():
 		print t_sql
 
 		u_sql = ("INSERT INTO users "\
-				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_time, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\
+				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_at, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\
 				 "VALUES (%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d)" % (user["id"],\
 																													  to_html_escaped(user["url"]),\
 																													  to_html_escaped(user["description"]),\
