@@ -121,7 +121,7 @@ for line in response.iter_lines():
 
 	if line:
 
-		print line
+		# print line
 
 		tweet = json.loads(line)
 

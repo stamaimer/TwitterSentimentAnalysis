@@ -91,8 +91,6 @@ for(id, text) in results:
 
 	sql = "UPDATE tweets SET tweet_pre_process_result = \"%s\" WHERE tweet_id = %d" % (' '.join(keywords), id)
 
-	# print sql
-
 	cursor.execute(sql)
 
 	connection.commit()
