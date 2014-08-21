@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import mysql.connector
+import collections
 import nltk
+
+def myround(var):
+	
+	return round(var, 2) if var != None else None
 
 def connectsql():
 	
@@ -16,7 +21,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 2500"
+sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 4000"
 
 cursor.execute(sql)
 
@@ -37,7 +42,7 @@ stopwords = nltk.corpus.stopwords.words('english') + ['mh17', '…', 'http', 'n\
 													  'incl', 'inna', 'int\'l', 'jazakallah', 'jaya', 'kiki', 'kunfayakun', 'malaysi…',\
 													  '\'excuse', '\'little', '\'no', '\'prime', '\'rather', '\'shot', '\'talk', '\'wash',\
 													  'spreadytweetz', 'surface-…', '“we', '•', '►', '➡⬅', '\'d', '\'did', '\'everything',\
-													  '-including', '20th', '3rd', '9m-mrd', 'a', 'aa', 'ai113', 'al-f…', 'aust', 'aw', '']
+													  '-including', '20th', '3rd', '9m-mrd', 'a', 'aa', 'ai113', 'al-f…', 'aust', 'aw', 'ac360']
 
 for record in records:
 
@@ -47,23 +52,71 @@ words = [word.lower() for word in nltk.tokenize.word_tokenize(words)]
 
 freqdist = nltk.FreqDist(words)
 
-print type(freqdist)
+for item in freqdist.items():
 
-for key in freqdist.keys():
+	if (item[0] in stopwords) or (item[1] < 5):
 
-	print key, '\t', freqdist[key]
+		freqdist.pop(item[0])
 
-	if freqdist[key] < 10:
+featvects = [None for _ in range(2400)]
 
-		del freqdist[key]
+for i in range(2400):
 
-		print 'del because frep'
+	featvect = [0 for _ in range(len(freqdist))]
 
-	elif key in stopwords:
+	words = [word.lower() for word in nltk.tokenize.word_tokenize(records[i][0])]
 
-		del freqdist[key]
+	for j in range(len(freqdist)):
 
-		print 'del because stop'
+		if freqdist.keys()[j] in words:
+
+			featvect[j] = 1
+
+	featvects[i] = featvect
+
+for i in range(6):
+
+	sets = [None for _ in range(2400)]
+
+	for j in range(2400):
+
+		sets[j] = ({'featvect':tuple(featvects[j])}, records[j][1])
+
+	print "length of tweets : ", len(sets)
+
+	print "range of testset : ", 400 * i, 400 * (i + 1)
+
+	testset = sets[400 * i : 400 * (i + 1)]
+
+	del sets[400 * i : 400 * (i + 1)]
+
+	trainset = sets
+
+	classifier = nltk.NaiveBayesClassifier.train(trainset)
+
+	rset = collections.defaultdict(set)
+	tset = collections.defaultdict(set)
+	
+	for n, (feature, classification) in enumerate(testset):
+
+			rset[classification].add(n)
+
+			temp = classifier.classify(feature)
+
+			tset[temp].add(n)
+
+	print "accuracy of classifier : ", myround(nltk.classify.accuracy(classifier, testset)), "\n"
+
+	print "precision of 0 : ", myround(nltk.metrics.precision(rset[0], tset[0])), "\trecall of 0 : ", myround(nltk.metrics.recall(rset[0], tset[0])), "\tf_measure of 0 : ", myround(nltk.metrics.f_measure(rset[0], tset[0]))
+	print "precision of 1 : ", myround(nltk.metrics.precision(rset[1], tset[1])), "\trecall of 1 : ", myround(nltk.metrics.recall(rset[1], tset[1])), "\tf_measure of 1 : ", myround(nltk.metrics.f_measure(rset[1], tset[1]))
+	print "precision of 2 : ", myround(nltk.metrics.precision(rset[2], tset[2])), "\trecall of 2 : ", myround(nltk.metrics.recall(rset[2], tset[2])), "\tf_measure of 2 : ", myround(nltk.metrics.f_measure(rset[2], tset[2]))
+	print "precision of 3 : ", myround(nltk.metrics.precision(rset[3], tset[3])), "\trecall of 3 : ", myround(nltk.metrics.recall(rset[3], tset[3])), "\tf_measure of 3 : ", myround(nltk.metrics.f_measure(rset[3], tset[3]))
+	print "precision of 4 : ", myround(nltk.metrics.precision(rset[4], tset[4])), "\trecall of 4 : ", myround(nltk.metrics.recall(rset[4], tset[4])), "\tf_measure of 4 : ", myround(nltk.metrics.f_measure(rset[4], tset[4]))
+	print "precision of 5 : ", myround(nltk.metrics.precision(rset[5], tset[5])), "\trecall of 5 : ", myround(nltk.metrics.recall(rset[5], tset[5])), "\tf_measure of 5 : ", myround(nltk.metrics.f_measure(rset[5], tset[5]))
+	print "precision of 6 : ", myround(nltk.metrics.precision(rset[6], tset[6])), "\trecall of 6 : ", myround(nltk.metrics.recall(rset[6], tset[6])), "\tf_measure of 6 : ", myround(nltk.metrics.f_measure(rset[6], tset[6]))
+
+	print "\n======================================================================\n"
+
 
 
 
