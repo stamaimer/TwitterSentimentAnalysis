@@ -21,7 +21,7 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 4000"
+sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 2400"
 
 cursor.execute(sql)
 
@@ -54,7 +54,7 @@ freqdist = nltk.FreqDist(words)
 
 for item in freqdist.items():
 
-	if (item[0] in stopwords) or (item[1] < 5):
+	if (item[0] in stopwords) or (item[1] < 60):
 
 		freqdist.pop(item[0])
 
