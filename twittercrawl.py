@@ -127,43 +127,47 @@ for line in response.iter_lines():
 
 		user = tweet["user"]
 
-		t_sql = ("INSERT INTO tweets "\
-				 "(user_id, tweet_id, tweet_text, tweet_source, tweet_truncated, tweet_created_at, tweet_retweet_count, tweet_favorite_count) "\
-				 "VALUES (%d, %d, \"%s\", \"%s\", %d, \"%s\", %d, %d)" % (user["id"],\
-				 												  		  tweet["id"],\
-																  		  to_html_escaped(tweet["text"]),\
-																  		  to_html_escaped(tweet["source"]),\
-																  		  booltoint(tweet["truncated"]),\
-																  		  to_html_escaped(tweet["created_at"]),\
-																  		  none2int(tweet["retweet_count"]),\
-																  		  none2int(tweet["favorite_count"])))
+		if "http" in tweet["text"]:
 
-		print t_sql
+			print tweet["text"], '\t', tweet["truncated"]
 
-		u_sql = ("INSERT INTO users "\
-				 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_at, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\
-				 "VALUES (%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d)" % (user["id"],\
-																													  to_html_escaped(user["url"]),\
-																													  to_html_escaped(user["description"]),\
-																													  to_html_escaped(user["name"]),\
-																													  to_html_escaped(user["screen_name"]),\
-																													  to_html_escaped(user["lang"]),\
-																													  to_html_escaped(user["location"]),\
-																													  to_html_escaped(user["time_zone"]),\
-																													  to_html_escaped(user["created_at"]),\
-																													  none2int(user["favourites_count"]),\
-																													  none2int(user["statuses_count"]),\
-																													  none2int(user["listed_count"]),\
-																													  none2int(user["friends_count"]),\
-																													  none2int(user["followers_count"])))
-		print u_sql
+		# t_sql = ("INSERT INTO tweets "\
+		# 		 "(user_id, tweet_id, tweet_text, tweet_source, tweet_truncated, tweet_created_at, tweet_retweet_count, tweet_favorite_count) "\
+		# 		 "VALUES (%d, %d, \"%s\", \"%s\", %d, \"%s\", %d, %d)" % (user["id"],\
+		# 		 												  		  tweet["id"],\
+		# 														  		  to_html_escaped(tweet["text"]),\
+		# 														  		  to_html_escaped(tweet["source"]),\
+		# 														  		  booltoint(tweet["truncated"]),\
+		# 														  		  to_html_escaped(tweet["created_at"]),\
+		# 														  		  none2int(tweet["retweet_count"]),\
+		# 														  		  none2int(tweet["favorite_count"])))
 
-		cursor.execute("set names utf8mb4")
+		# print t_sql
 
-		cursor.execute(t_sql)
-		cursor.execute(u_sql)
+		# u_sql = ("INSERT INTO users "\
+		# 		 "(user_id, user_url, user_desc, user_name, user_screen_name, user_lang, user_location, user_time_zone, user_created_at, user_favorites_count, user_statuses_count, user_listed_count, user_friends_count, user_followers_count) "\
+		# 		 "VALUES (%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d)" % (user["id"],\
+		# 																											  to_html_escaped(user["url"]),\
+		# 																											  to_html_escaped(user["description"]),\
+		# 																											  to_html_escaped(user["name"]),\
+		# 																											  to_html_escaped(user["screen_name"]),\
+		# 																											  to_html_escaped(user["lang"]),\
+		# 																											  to_html_escaped(user["location"]),\
+		# 																											  to_html_escaped(user["time_zone"]),\
+		# 																											  to_html_escaped(user["created_at"]),\
+		# 																											  none2int(user["favourites_count"]),\
+		# 																											  none2int(user["statuses_count"]),\
+		# 																											  none2int(user["listed_count"]),\
+		# 																											  none2int(user["friends_count"]),\
+		# 																											  none2int(user["followers_count"])))
+		# print u_sql
 
-		connection.commit()
+		# cursor.execute("set names utf8mb4")
+
+		# cursor.execute(t_sql)
+		# cursor.execute(u_sql)
+
+		# connection.commit()
 
 cursor.close()
 connection.close()

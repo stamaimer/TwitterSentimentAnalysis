@@ -1,6 +1,7 @@
 import mysql.connector
 import twitter_text
 import utilities
+import codecs
 import nltk
 import re
 
@@ -29,29 +30,37 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_text FROM tweets LIMIT 0, 2400"
+sql = "SELECT tweet_text FROM tweets"
 
 cursor.execute(sql)
 
 records = cursor.fetchall()
 
-words = ""
+file = codecs.open('preprocessed', 'w', 'utf-8')
 
-tokenizer = utilities.Tokenizer()
+#tokenizer = utilities.Tokenizer()
 
 for record in records:
 	
-	print record[0]
+#	print record[0]
 	
+	file.write(record[0])
+
+	file.write('\r\n')
+
 	text = pre_process(record[0])
 	
-	print '\r\n'.join(tokenizer.tokenize(text))
+	file.write(text)
 
-	print '====================================================='
+	file.write('\r\n')
 
-	print '\r\n'.join(nltk.tokenize.word_tokenize(text))
+#	print '\r\n'.join(tokenizer.tokenize(text))
 
-	print '====================================================='
+#	print '====================================================='
 
+#	print '\r\n'.join(nltk.tokenize.word_tokenize(text))
 
+#	print '====================================================='
+
+file.close()
 	
