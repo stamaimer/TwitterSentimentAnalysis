@@ -127,9 +127,9 @@ for line in response.iter_lines():
 
 		user = tweet["user"]
 
-		if "http" in tweet["text"]:
+		# if "http" in tweet["text"]:
 
-			print tweet["text"], '\t', tweet["truncated"]
+		print tweet["text"], '\t', tweet["truncated"]
 
 		# t_sql = ("INSERT INTO tweets "\
 		# 		 "(user_id, tweet_id, tweet_text, tweet_source, tweet_truncated, tweet_created_at, tweet_retweet_count, tweet_favorite_count) "\

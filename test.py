@@ -16,7 +16,7 @@ def pre_process(text):
 	text += ''
 
 	text = re.sub('RT', ' ', text)
-	text = re.sub('@.*?[: ]', ' ', text)
+	text = re.sub('@.*?[: $]', ' ', text)
 
 	return text
 
