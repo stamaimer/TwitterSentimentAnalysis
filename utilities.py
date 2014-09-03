@@ -109,7 +109,7 @@ regex_strings = (
     ,
     # Remaining word types:
     r"""
-    (?:[a-z][a-z'\-_]+[a-z])       # Words with apostrophes or dashes.
+    (?:[a-z][a-z0-9'\-_]+[0-9a-z])       # Words with apostrophes or dashes.
     |
     (?:[+\-]?\d+[,/.:-]\d+[+\-]?)  # Numbers, including fractions, decimals.
     |
@@ -213,7 +213,8 @@ if __name__ == '__main__':
     samples = (
         u"RT @ #happyfuncoding: this is a typical Twitter tweet :-)",
         u"HTML entities &amp; other Web oddities can be an &aacute;cute <em class='grumpy'>pain</em> >:(",
-        u"It's perhaps noteworthy that phone numbers like +1 (800) 123-4567, (800) 123-4567, and 123-4567 are treated as words despite their whitespace."
+        u"It's perhaps noteworthy that phone numbers like +1 (800) 123-4567, (800) 123-4567, and 123-4567 are treated as words despite their whitespace.",
+	u"RT @stamaimer: prayformh17 17 mh17 aids2014 007dect hm17news"
         )
 
     for s in samples:
