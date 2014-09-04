@@ -9,6 +9,7 @@ import base64
 import hashlib
 import binascii
 import requests
+import preprocessim
 import mysql.connector
 
 def connectsql():
@@ -129,7 +130,7 @@ for line in response.iter_lines():
 
 		# if "http" in tweet["text"]:
 
-		print tweet["text"], '\t', tweet["truncated"]
+		preprocessim.output(tweet['text'])
 
 		# t_sql = ("INSERT INTO tweets "\
 		# 		 "(user_id, tweet_id, tweet_text, tweet_source, tweet_truncated, tweet_created_at, tweet_retweet_count, tweet_favorite_count) "\

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import mysql.connector
+import preprocessim
 import collections
+import utilities
 import nltk
 
 def myround(var):
@@ -21,11 +23,13 @@ connection = connectsql()
 
 cursor = connection.cursor()
 
-sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT 0, 2400"
+sql = "SELECT tweet_text, tweet_classification FROM tweets LIMIT 0, 2400"
 
 cursor.execute(sql)
 
 records = cursor.fetchall()
+
+tokenizer = utilities.Tokenizer()
 
 words = ""
 
@@ -42,13 +46,15 @@ stopwords = nltk.corpus.stopwords.words('english') + ['mh17', '…', 'http', 'n\
 													  'incl', 'inna', 'int\'l', 'jazakallah', 'jaya', 'kiki', 'kunfayakun', 'malaysi…',\
 													  '\'excuse', '\'little', '\'no', '\'prime', '\'rather', '\'shot', '\'talk', '\'wash',\
 													  'spreadytweetz', 'surface-…', '“we', '•', '►', '➡⬅', '\'d', '\'did', '\'everything',\
-													  '-including', '20th', '3rd', '9m-mrd', 'a', 'aa', 'ai113', 'al-f…', 'aust', 'aw', 'ac360']
+													  '-including', '20th', '3rd', '9m-mrd', 'a', 'aa', 'ai113', 'al-f…', 'aust', 'aw', 'ac360'] + ['mh17', 'says', 'url', 'username', u'\u2026', '\'', '&', 'via', 'must', 'may', 'it\'s', 'u', '-', 'another', 'please', 'say', 'many', '9', '6', '4', '3', '2', '1', '+', 'goes', 'i\'m', ':', '.', ',', '17', 'prayformh', 'news', 'gaza', 'mh370', 'people', 'black', 'us', 'world', 'flight', 'airlines', 'passengers', 'plane', 'families', 'aids', 'lost', 'crew', 'one', 'train', 'air', '']
 
 for record in records:
 
-	words = words + record[0].encode('utf-8')
+	print preprocessim.preprocess(record[0])
 
-words = [word.lower() for word in nltk.tokenize.word_tokenize(words)]
+	words = words + preprocessim.preprocess(record[0])
+
+words = [word for word in tokenizer.tokenize(words)]
 
 freqdist = nltk.FreqDist(words)
 
@@ -64,7 +70,7 @@ for i in range(2400):
 
 	featvect = [0 for _ in range(len(freqdist))]
 
-	words = [word.lower() for word in nltk.tokenize.word_tokenize(records[i][0])]
+	words = [word for word in tokenizer.tokenize(preprocessim.preprocess(records[i][0]))]
 
 	for j in range(len(freqdist)):
 

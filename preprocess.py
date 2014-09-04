@@ -3,12 +3,16 @@ import sys
 import nltk
 import tfidf
 import codecs
+import utilities
+import preprocessim
 import twitter_text
 import mysql.connector
 from twitter_text import TwitterText
 from nltk.stem.wordnet import WordNetLemmatizer
 
-stopwords = nltk.corpus.stopwords.words('english') + ['-', '\\']	#
+stopwords = nltk.corpus.stopwords.words('english') + ['mh17', 'says', 'url', 'username', u'\u2026', '\'', '&', 'via', 'must', 'may', 'it\'s', 'u', '-', 'another', 'please', 'say', 'many', '9', '6', '4', '3', '2', '1', '+', 'goes', 'i\'m', ':', '.', ',', '17', 'prayformh', 'news', 'gaza', 'mh370', 'people', 'black', 'us', 'world', 'flight', 'airlines', 'passengers', 'plane', 'families', 'aids', 'lost', 'crew', 'one', 'train', 'air', '']	#
+
+tokenizer = utilities.Tokenizer()
 
 def connectsql():
 	
@@ -71,17 +75,25 @@ results = cursor.fetchall()
 
 for(id, text) in results:
 
-	text = pre_process(text)
+	text = preprocessim.preprocess(text)
 
-	terms = [term for term in text.split()]
+	print text
+
+	terms = [term for term in tokenizer.tokenize(text)]
+
+	print terms
 
 	# bigrams = nltk.bigrams(text.split())
 
 	terms = del_stopwords(terms)
 
+	print terms
+
 	terms = lemmatize(terms)
 
-	keywords  = tfidf.gen_keywords(' '.join(terms), './corpus', 5)
+	print terms
+
+	keywords  = tfidf.gen_keywords(' '.join(terms), './corpus', 10)
 
 	for i in range(len(keywords)):
 

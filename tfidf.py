@@ -4,8 +4,11 @@ import os
 import sys
 import math
 import nltk
+import utilities
 
-stopwords = nltk.corpus.stopwords.words('english') + ['.', ',', '?', '(', ')', ':', '"', '-', '{', '}', '\'',	'--', '\'s', '\'re']
+tokenizer = utilities.Tokenizer()
+
+stopwords = nltk.corpus.stopwords.words('english') + ['.', ',', '?', '(', ')', ':', '"', '-', '{', '}', '\'',	'--', '\'s', '\'re', 'the', 'you']
 
 pos = ('JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'RB', 'RBR', 'RBS', 'RP', 'SYM', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ')
 
@@ -27,7 +30,7 @@ def cal_term_freq(text):
 
 	sentences = nltk.tokenize.sent_tokenize(text)
 
-	terms    = [term.lower() for sentence in sentences for term in nltk.tokenize.word_tokenize(sentence)]
+	terms    = [term.lower() for sentence in sentences for term in tokenizer.tokenize(sentence)]
 
 	length   = len(terms)
 
