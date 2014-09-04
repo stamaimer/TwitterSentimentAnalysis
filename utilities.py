@@ -109,11 +109,7 @@ regex_strings = (
     ,
     # Remaining word types:
     r"""
-<<<<<<< HEAD
     (?:[a-z][a-z0-9'\.\-_]+[0-9a-z\.])       # Words with apostrophes or dashes.
-=======
-    (?:[a-z][a-z0-9'\-_]+[0-9a-z])       # Words with apostrophes or dashes.
->>>>>>> 7c6bb4842a3829690cec02aa421ae670f8428e79
     |
     (?:[+\-]?\d+[,/\.:\-]?\d+[+\-]?)  # Numbers, including fractions, decimals.
     |
