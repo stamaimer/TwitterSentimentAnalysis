@@ -33,23 +33,11 @@ for i in range(6):
 
 	testsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records[400 * i : 400 * (i + 1)]]
 
-	# for index in range(400 * i, 400 * (i + 1)):
-
 	del records[400 * i : 400 * (i + 1)]
 
 	trainsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records]
 
 	classifier = nltk.NaiveBayesClassifier.train(trainsets)
-
-	# sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets LIMIT %d, %d" % (400 * i, 400 * (i + 1))
-
-	# sql = "SELECT tweet_pre_process_result, tweet_classification FROM tweets WHERE (id >= ) AND (id <= ) ORDER BY RAND() LIMIT 400"
-
-	# cursor.execute(sql)
-
-	# records = cursor.fetchall()
-	
-	# testsets = [({'preprocessed':preprocessed}, classification) for (preprocessed, classification) in records]
 
 	rset = collections.defaultdict(set)
 	tset = collections.defaultdict(set)
@@ -74,4 +62,4 @@ for i in range(6):
 
 	print "\n======================================================================\n"
 
-	# print classifier.show_most_informative_features(5)
+	print classifier.show_most_informative_features(5)

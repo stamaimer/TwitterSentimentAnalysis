@@ -12,7 +12,7 @@ import utilities
 import HTMLParser
 import mysql.connector
 
-stopwords = nltk.corpus.stopwords.words('english') + ['mh17', 'says', 'url', 'username', u'\u2026', '\'', '&', 'via', 'must', 'may', 'it\'s', 'u', '-', 'another', 'please', 'say', 'many', '9', '6', '4', '3', '2', '1', '+', 'goes', 'i\'m', ':', '.', ',', '17', 'prayformh']
+stopwords = nltk.corpus.stopwords.words('english') + ['mh17', 'says', 'url', 'username', u'\u2026', '\'', '&', 'via', 'must', 'may', 'it\'s', 'u', '-', 'another', 'please', 'say', 'many', '9', '6', '4', '3', '2', '1', '+', 'goes', 'i\'m', ':', '.', ',', '17', 'prayformh', '(', ')']
 
 # emotion = [':-)', ':)', ':o)', ':]', ':3', ':c)', ':>', '=]', '8)', '=)', ':}', ':^)', ':っ)',\
 # 		   ':-D', ':D', '8-D', '8D', 'x-D', 'xD', 'X-D', 'XD', '=-D', '=D', '=-3', '=3', 'B^D',\
@@ -93,23 +93,21 @@ def preprocess(text):
 # 		file1.write(str(item[1]))
 # 		file1.write('\r\n')
 
-# words = ''
+for record in records:
 
-# for record in records:
+ 	words = words + ' ' + preprocess(record[0])
 
-# 	words = words + ' ' + preprocess(record[0])
+freqdist = nltk.FreqDist(tokenizer.tokenize(words))
 
-# freqdist = nltk.FreqDist(tokenizer.tokenize(words))
+for item in freqdist.items():
 
-# for item in freqdist.items():
+ 	if item[0] not in stopwords:
 
-# 	if item[0] not in stopwords:
-
-# 		print item[0]
-# 		file2.write(item[0])
-# 		file2.write('\t\t')
-# 		file2.write(str(item[1]))
-# 		file2.write('\r\n')
+ 		print item[0]
+ 		file2.write(item[0])
+ 		file2.write('\t\t')
+		file2.write(str(item[1]))
+ 		file2.write('\r\n')
 
 def output(tweet):
 
