@@ -112,5 +112,13 @@ while 1:
                 users.insert(user)
 
     except requests.exceptions.ChunkedEncodingError:
+    
+        print "requests.exceptions.ChunkedEncodingError"
+
+        continue
+
+    except requests.exceptions.SSLError:
+
+        print "requests.exceptions.SSLError"
 
         continue
