@@ -70,9 +70,9 @@ def authorize():
 		+ "oauth_consumer_key=\""     + urlencode(parameters["oauth_consumer_key"]) 	+ "\", "\
 		+ "oauth_timestamp=\"" 	      + urlencode(parameters["oauth_timestamp"]) 	+ "\", "\
 		+ "oauth_signature=\"" 	      + urlencode(oauth_signature) 			+ "\", "\
-		+ "oauth_version=\"" 	      + urlencode(parameters["oauth_version"]) 		+ "\", "\
-		+ "oauth_nonce=\"" 	      + urlencode(parameters["oauth_nonce"]) 		+ "\", "\
-		+ "oauth_token=\"" 	      + urlencode(parameters["oauth_token"]) 		+ "\""
+		+ "oauth_version=\"" 	      + urlencode(parameters["oauth_version"])          + "\", "\
+		+ "oauth_nonce=\"" 	      + urlencode(parameters["oauth_nonce"])            + "\", "\
+		+ "oauth_token=\"" 	      + urlencode(parameters["oauth_token"])            + "\""
 
     headers = {"authorization" : authorization}
 
