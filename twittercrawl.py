@@ -38,36 +38,35 @@ def gen_nonce():
 
 	return re.sub("[\W_]", "", base64.b64encode(os.urandom(32)))
 
-oauth_timestamp = timestamp()
-oauth_nonce 	= gen_nonce()
+def authorize():
 
-parameters = {
-                "oauth_signature_method" : OAUTH_SIGNATURE_METHOD, 
-		"oauth_consumer_key"     : OAUTH_CONSUMER_KEY, 
-		"oauth_timestamp" 	 : oauth_timestamp, 
-		"oauth_version" 	 : OAUTH_VERSION, 
-		"oauth_token" 		 : OAUTH_TOKEN, 
-		"oauth_nonce"		 : oauth_nonce
-	     }
+    parameters = {
+                    "oauth_signature_method" : OAUTH_SIGNATURE_METHOD, 
+        	    "oauth_consumer_key"     : OAUTH_CONSUMER_KEY, 
+		    "oauth_timestamp" 	     : oauth_timestamp, 
+		    "oauth_version" 	     : OAUTH_VERSION, 
+		    "oauth_token" 	     : OAUTH_TOKEN, 
+		    "oauth_nonce"	     : oauth_nonce
+	         }
 
-parameters.update(payloads)
+    parameters.update(payloads)
 
-parastr = ""
+    parastr = ""
 
-for key in sorted(parameters):
+    for key in sorted(parameters):
 
-	parastr = parastr + urlencode(key) + "=" + urlencode(parameters[key]) + "&"
+	    parastr = parastr + urlencode(key) + "=" + urlencode(parameters[key]) + "&"
 
-parastr = parastr[:-1]
+    parastr = parastr[:-1]
 
-basestr = "GET&" + urlencode(url) + "&" + urlencode(parastr)
+    basestr = "GET&" + urlencode(url) + "&" + urlencode(parastr)
 
-digest = hmac.new(signkey, basestr, hashlib.sha1).digest()
+    digest = hmac.new(signkey, basestr, hashlib.sha1).digest()
 
-oauth_signature = binascii.b2a_base64(digest)[:-1]
+    oauth_signature = binascii.b2a_base64(digest)[:-1]
 
-authorization = "OAuth "\
-		+ "oauth_signature_method=\"" + urlencode(parameters["oauth_signature_method"]) + "\", "\
+    authorization = "OAuth "\
+        	+ "oauth_signature_method=\"" + urlencode(parameters["oauth_signature_method"]) + "\", "\
 		+ "oauth_consumer_key=\""     + urlencode(parameters["oauth_consumer_key"]) 	+ "\", "\
 		+ "oauth_timestamp=\"" 	      + urlencode(parameters["oauth_timestamp"]) 	+ "\", "\
 		+ "oauth_signature=\"" 	      + urlencode(oauth_signature) 			+ "\", "\
@@ -75,11 +74,9 @@ authorization = "OAuth "\
 		+ "oauth_nonce=\"" 	      + urlencode(parameters["oauth_nonce"]) 		+ "\", "\
 		+ "oauth_token=\"" 	      + urlencode(parameters["oauth_token"]) 		+ "\""
 
-headers = {"authorization" : authorization}
+    headers = {"authorization" : authorization}
 
-response = requests.get(url, params = payloads, headers = headers, stream = True)
-
-print response.status_code
+    return headers
 
 mongo_client = pymongo.MongoClient("127.0.0.1", 27017)
 
@@ -89,16 +86,31 @@ tweets = twitter.tweets
 
 users  = twitter.users
 
-for line in response.iter_lines():
+while 1:
 
-    if line:
+    try:
 
-        print line
+        oauth_timestamp = timestamp()
+        oauth_nonce 	= gen_nonce()
 
-        tweet = json.loads(line)
+        response = requests.get(url, params = payloads, headers = authorize(), stream = True)
 
-        user = tweet["user"]
+        print response.status_code
 
-        tweets.insert(tweet)
+        for line in response.iter_lines():
 
-        users.insert(user)
+            if line:
+
+                print line
+
+                tweet = json.loads(line)
+
+                user = tweet["user"]
+
+                tweets.insert(tweet)
+
+                users.insert(user)
+
+    except requests.exceptions.ChunkedEncodingError:
+
+        continue
