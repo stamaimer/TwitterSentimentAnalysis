@@ -12,14 +12,14 @@ import requests
 
 url = "https://stream.twitter.com/1.1/statuses/sample.json"
 
-payloads = {"stall_warnings" : "true", "language" : "en"}
+payloads = {"language" : "en"}
 
 CONSUMER_SECRET = "oFAlNZr6JGHwCdYGrYNfS3plUSdxg8UlEP2RtiKg59uSYahWRk"
 TOKEN_SECRET    = "rVX3YRtx2Qa5rO9PPqtWP1Fu3HHTK70EuSmBtJXmW7KjE"
 
 secrets = {"consumer_secret" : CONSUMER_SECRET, "token_secret" : TOKEN_SECRET}
 
-signkey = '&'.join(secrets.values())
+signkey = "&".join(secrets.values())
 
 OAUTH_SIGNATURE_METHOD = "HMAC-SHA1"
 OAUTH_CONSUMER_KEY     = "6s35FXsv4jD2ar0ZlDYjnt7jZ"
@@ -28,7 +28,7 @@ OAUTH_TOKEN 	       = "1112070588-5bNvcWYSIowvzRbRnSp4jetaCbpLk0xNVFg8egv"
 
 def urlencode(str):
 
-	return urllib.quote(str, '')
+	return urllib.quote(str, "")
 
 def timestamp():
 
@@ -36,7 +36,7 @@ def timestamp():
 
 def gen_nonce():
 
-	return re.sub('[\W_]', '', base64.b64encode(os.urandom(32)))
+	return re.sub("[\W_]", "", base64.b64encode(os.urandom(32)))
 
 oauth_timestamp = timestamp()
 oauth_nonce 	= gen_nonce()
@@ -81,7 +81,7 @@ response = requests.get(url, params = payloads, headers = headers, stream = True
 
 print response.status_code
 
-mongo_client = pymongo.MongoClient('127.0.0.1', 27017)
+mongo_client = pymongo.MongoClient("127.0.0.1", 27017)
 
 twitter = mongo_client.twitter
 
@@ -91,17 +91,14 @@ users  = twitter.users
 
 for line in response.iter_lines():
 
-	if line:
+    if line:
 
-		print line
+        print line
 
-		tweet = json.loads(line)
+        tweet = json.loads(line)
 
-		user = tweet["user"]
+        user = tweet["user"]
 
-		print "tweet_id : ", tweets.insert(tweet)
+        tweets.insert(tweet)
 
-		print "user_id : ", users.insert(user)
-
-
-
+        users.insert(user)
