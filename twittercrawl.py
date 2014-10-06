@@ -107,9 +107,9 @@ while 1:
 
                 print tweet["text"]
 
-#                print tweets.insert(tweet)
+                tweets.insert(tweet)
 
-#                print users.insert(user)
+                users.insert(user)
 
     except requests.exceptions.ChunkedEncodingError:
     
