@@ -101,15 +101,15 @@ while 1:
 
             if line:
 
-                print line
+#                print line
 
                 tweet = json.loads(line)
 
                 user = tweet["user"]
 
-                tweets.insert(tweet)
+                print tweets.insert(tweet)
 
-                users.insert(user)
+                print users.insert(user)
 
     except requests.exceptions.ChunkedEncodingError:
     
@@ -120,5 +120,11 @@ while 1:
     except requests.exceptions.SSLError:
 
         print "requests.exceptions.SSLError"
+
+        continue
+
+    except requests.exceptions.ConnectionError:
+
+        print "requests.exceptions.ConnectionError"
 
         continue
