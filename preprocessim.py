@@ -38,7 +38,7 @@ argc = 3
 
 if argc != len(sys.argv):
 
-    print 'usage: python preprocessim.py filename'
+    print 'usage: python preprocessim.py ifilename ofilename'
 
     exit(1)
 
