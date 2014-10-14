@@ -6,20 +6,41 @@ this code implements a basic twitter-aware preprocesser
 
 import re
 import HTMLParser
+import progressbar
 
 def remove_duplicate(tweets, count, file):
 
     set = set()
 
+    print "remove duplicate"
+
+    progressbar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+
+    i = 0
+
     for tweet in tweets:
 
         set.add(tweet)
+
+        progressbar.update(i + 1)
+
+        i = i + 1
+
+    print "remve rt"    
+
+    progressbar = progressbar.ProgressBar(maxval = len(set), widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+
+    i = 0
 
     for tweet in set:
 
         if 'RT' not in tweet and 'rt' not in tweet:
 
-            file.write(tweet)
+            file.writeline(tweet)
+
+        progressbar.update(i + 1)
+
+        i = i + 1
 
 def preprocess(tweet):
 
@@ -46,8 +67,18 @@ def preprocess(tweet):
 
 def preprocess(tweets, count, file):
 
+    print "preprocess"
+
+    progressbar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+
+    i = 0
+
     for tweet in tweets:
 
         tweet = preprocess(tweet)
 
-        file.write(tweet)
+        file.writeline(tweet)
+
+        progressbar.update(i + 1)
+
+        i = i + 1
