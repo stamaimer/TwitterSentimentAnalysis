@@ -27,7 +27,7 @@ def gen_dict():
 
         tweet = preprocess.preprocess(tweet['text'])
 
-        terms.append(tokenizer.tokenize(tweet))
+        terms.extend(tokenizer.tokenize(tweet))
 
         i = i + 1
 
