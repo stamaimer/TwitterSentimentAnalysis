@@ -1,27 +1,53 @@
-import util
-import nltk
-from nltk.stem.wordnet import WordNetLemmatizer
+# -*- coding: utf-8 -*-
 
-stopwords = nltk.corpus.stopwords.words('english') + ['']
+"""
+this code implements a basic twitter-aware preprocesser
+"""
 
-tokenizer = util.Tokenizer()
+import re
+import HTMLParser
 
-def del_stopwords(tweet):
+def remove_duplicate(tweets, count, file):
 
-    for term in tweet:
+    set = set()
 
-        if term in stopwords:
+    for tweet in tweets:
 
-            tweet.remove(term)
+        set.add(tweet)
 
-    return tweet
+    for tweet in set:
 
-def lemmatize(tweet):
+        if 'RT' not in tweet and 'rt' not in tweet:
 
-    lmtzr = WordNetLemmatizer()
+            file.write(tweet)
 
-    for i in range(len(tweet)):
+def preprocess(tweet):
 
-        tweet[i] = lmtzr.lemmatize(tweet[i])
+	tweet = re.sub(u'\u2026', ' ', tweet)                             #deal with horizontal ellipsis
+	tweet = re.sub(u'[\u201c\u201d]', '"', tweet)                     #deal with double quotation mark
+	tweet = re.sub(u'[\u2018\u2019]', '\'', tweet)                    #deal with single quotation mark
 
-    return tweet
+	tweet = re.sub('h…', 'URL', tweet)                                #deal with truncated url
+	tweet = re.sub('ht?….*$', 'URL', tweet)                           #deal with truncated url 
+	tweet = re.sub('(^|)?http?s?:?/?/?.*?( |$)', 'URL', tweet)        #deal with compelted url
+
+	tweet = re.sub(u'(RT |\\\\|\u201c)"?@.*?[: ]', ' ', tweet)        #deal with retweet
+	tweet = re.sub('\.?@.*?( |:|$)', 'USERNAME ', tweet)              #deal with username
+
+	tweet = HTMLParser.HTMLParser().unescape(tweet)                   #deal with character entity
+	tweet = re.sub('[][!"#$*,/;<=>?@\\\\^_`{|}~]', ' ', tweet)        #deal with punctuation
+
+	tweet = re.sub('( - )', ' ', tweet)
+	tweet = re.sub('---', ' ', tweet)
+	tweet = re.sub('\.\.\.', ' ', tweet)
+	tweet = re.sub('(, |\.( |$))', ' ', tweet)
+
+	return tweet
+
+def preprocess(tweets, count, file):
+
+    for tweet in tweets:
+
+        tweet = preprocess(tweet)
+
+        file.write(tweet)
