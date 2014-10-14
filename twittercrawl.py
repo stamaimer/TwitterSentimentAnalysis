@@ -127,4 +127,8 @@ while 1:
 
         print "requests.exceptions.ConnectionError"
 
+    except ValueError:
+
+        print "ValueError"
+
         continue

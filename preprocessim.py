@@ -34,22 +34,22 @@ def preprocess(text):
 
 	return text
 
-argc = 3
-
-if argc != len(sys.argv):
-
-    print 'usage: python preprocessim.py ifilename ofilename'
-
-    exit(1)
-
-ifile = codecs.open(sys.argv[1], 'r', 'utf-8')
-ofile = codecs.open(sys.argv[2], 'w', 'utf-8')
-
-for line in ifile:
-
-    ofile.write(preprocess(line))
-    ofile.write('\n')
-    ofile.write(line)
-    ofile.write('\n')
-
-print "finished"
+#argc = 3
+#
+#if argc != len(sys.argv):
+#
+#    print 'usage: python preprocessim.py ifilename ofilename'
+#
+#    exit(1)
+#
+#ifile = codecs.open(sys.argv[1], 'r', 'utf-8')
+#ofile = codecs.open(sys.argv[2], 'w', 'utf-8')
+#
+#for line in ifile:
+#
+#    ofile.write(preprocess(line))
+#    ofile.write('\n')
+#    ofile.write(line)
+#    ofile.write('\n')
+#
+#print "finished"
