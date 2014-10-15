@@ -49,15 +49,57 @@ def main():
 
     tweets, count = get_tweets_from_mongodb()
 
-    file = codecs.open('./data/preprocessed', 'w', 'utf-8')
+    ofile = codecs.open('./data/sourced', 'w', 'utf-8')
 
     try:
 
-        preprocess.preprocess(tweets, count, file)
+        print 'write source tweets to file'
+
+        bar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+
+        i = 0
+
+        for tweet in tweets:
+
+            ofile.writeline(tweet)
+
+            bar.update(i + 1)
+
+            i = i + 1
+
+        print '%d tweets sourced' % count
 
     finally:
 
-        file.close()
+        ofile.close()
+
+    ofile = codecs.open('./data/removed', 'w', 'utf-8')
+
+    try:
+
+        preprocess.remove(tweets, count, ofile)
+
+        print '%d tweets removed' % count - len(ofile.readlines())
+
+    finally:
+
+        ofile.close()
+
+    ifile = codecs.open('./data/removed', 'r', 'utf-8')
+    ofile = codecs.open('./data/preprocessed', 'w', 'utf-8')
+
+    try:
+
+        count = len(ifile.readlines())
+
+        preprocess.preprocess(ifile, count, ofile)
+
+        print '%d tweets preprocessed' % count
+
+    finally:
+
+        ifile.close()
+        ofile.close()
 
 if __name__ == '__main__':
 

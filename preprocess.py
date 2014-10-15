@@ -8,11 +8,11 @@ import re
 import HTMLParser
 import progressbar
 
-def remove_duplicate(tweets, count, file):
+def remove(tweets, count, file):
 
     set = set()
 
-    print "remove duplicate"
+    print "remove duplicate tweets"
 
     progressbar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
 
@@ -26,7 +26,7 @@ def remove_duplicate(tweets, count, file):
 
         i = i + 1
 
-    print "remve rt"    
+    print "remve rt tweets"    
 
     progressbar = progressbar.ProgressBar(maxval = len(set), widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
 
@@ -67,7 +67,7 @@ def preprocess(tweet):
 
 def preprocess(tweets, count, file):
 
-    print "preprocess"
+    print "preprocess tweets"
 
     progressbar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
 
