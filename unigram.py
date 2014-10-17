@@ -1,40 +1,50 @@
 import nltk
 import util
-from nltk.stem.wordnet import WordNetLemmatizer
+import progressbar
 
-def del_stopwords(tweet):
+def gen_dict(twitter):
 
-    stopwords = nltk.corpus.stopwords.words('english') + ['']
+    preprocessed = twitter.preprocessed
 
-    for term in tweet:
+    count = preprocessed.count()
 
-        if term in stopwords:
-
-            tweet.remove(term)
-
-    return tweet
-
-def lemmatize(tweet):
-
-    lmtzr = WordNetLemmatizer()
-
-    for i in range(len(tweet)):
-
-        tweet[i] = lmtzr.lemmatize(tweet[i])
-
-    return tweet
-
-def gen_dict(tweets, count, file):
+    tweets = preprocessed.find({}, {'text':1, '_id':0})
 
     tokenizer = util.Tokenizer()
 
     terms = []
 
+    print "generate dictionary"
+
+    bar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
+
+    i = 0
+
     for tweet in tweets:
 
-        terms.extend(tokenizer.tokenize(tweet))
+        terms.extend(tokenizer.tokenize(tweet['text']))
+
+        bar.update(i + 1)
+
+        i = i + 1
+
+    bar.finish()
 
     freqdist = nltk.FreqDist(terms)
 
-    return freqdist
+    print "calculate frequency"
+
+    bar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
+
+    i = 0
+
+    for key in freqdist.keys():
+
+        twitter.unigram.insert({'collocation':key, 'frequency':freqdist[key]})
+
+        bar.update(i + 1)
+
+        i = i + 1
+
+    bar.finish()
 

@@ -81,7 +81,7 @@ def preprocess(twitter):
 
     count = tweets.count()
 
-    tweets = tweets.find()
+    tweets = tweets.find({}, {'text':1, '_id':0})
 
     print "preprocess tweets"
 

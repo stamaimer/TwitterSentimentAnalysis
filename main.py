@@ -1,5 +1,6 @@
 import preprocess
 import pymongo
+import unigram
 
 def get_db():
 
@@ -13,9 +14,11 @@ def main():
 
     twitter = get_db()
 
-    preprocess.remove(twitter)
+    #preprocess.remove(twitter)
 
-    preprocess.preprocess(twitter)
+    #preprocess.preprocess(twitter)
+
+    unigram.gen_dict(twitter)
 
 if __name__ == '__main__':
 
