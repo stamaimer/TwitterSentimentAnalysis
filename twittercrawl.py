@@ -112,8 +112,14 @@ while 1:
                 users.insert(user)
 
     except requests.exceptions.ChunkedEncodingError:
-    
+
         print "requests.exceptions.ChunkedEncodingError"
+
+        continue
+
+    except requests.exceptions.ConnectionError:
+
+        print "requests.exceptions.ConnectionError"
 
         continue
 
@@ -122,10 +128,6 @@ while 1:
         print "requests.exceptions.SSLError"
 
         continue
-
-    except requests.exceptions.ConnectionError:
-
-        print "requests.exceptions.ConnectionError"
 
     except ValueError:
 

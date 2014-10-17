@@ -8,41 +8,51 @@ import re
 import HTMLParser
 import progressbar
 
-def remove(tweets, count, file):
+def remove(twitter):
 
-    set = set()
+    tweets = twitter.tweets
+
+    count = tweets.count()
+
+    tweets = tweets.find({}, {'text':1, '_id':0})
+
+    container = set()
 
     print "remove duplicate tweets"
 
-    progressbar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+    bar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
 
     i = 0
 
     for tweet in tweets:
 
-        set.add(tweet)
+        container.add(tweet['text'])
 
-        progressbar.update(i + 1)
+        bar.update(i + 1)
 
         i = i + 1
 
-    print "remve rt tweets"    
+    bar.finish()
 
-    progressbar = progressbar.ProgressBar(maxval = len(set), widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+    print "remve rt tweets"
+
+    bar = progressbar.ProgressBar(maxval = len(container), widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
 
     i = 0
 
-    for tweet in set:
+    for tweet in container:
 
         if 'RT' not in tweet and 'rt' not in tweet:
 
-            file.writeline(tweet)
+            twitter.removed.insert({'text':tweet})
 
-        progressbar.update(i + 1)
+        bar.update(i + 1)
 
         i = i + 1
 
-def preprocess(tweet):
+    bar.finish()
+
+def process(tweet):
 
 	tweet = re.sub(u'\u2026', ' ', tweet)                             #deal with horizontal ellipsis
 	tweet = re.sub(u'[\u201c\u201d]', '"', tweet)                     #deal with double quotation mark
@@ -65,20 +75,28 @@ def preprocess(tweet):
 
 	return tweet
 
-def preprocess(tweets, count, file):
+def preprocess(twitter):
+
+    tweets = twitter.removed
+
+    count = tweets.count()
+
+    tweets = tweets.find()
 
     print "preprocess tweets"
 
-    progressbar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+    bar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
 
     i = 0
 
     for tweet in tweets:
 
-        tweet = preprocess(tweet)
+        tweet = process(tweet['text'])
 
-        file.writeline(tweet)
+        twitter.preprocessed.insert({'text':tweet})
 
-        progressbar.update(i + 1)
+        bar.update(i + 1)
 
         i = i + 1
+
+    bar.finish()
