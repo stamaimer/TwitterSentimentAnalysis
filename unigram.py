@@ -1,5 +1,6 @@
 import nltk
 import util
+import operator
 import progressbar
 
 def gen_dict(twitter):
@@ -32,19 +33,20 @@ def gen_dict(twitter):
 
     freqdist = nltk.FreqDist(terms)
 
+    sorted_freqdist = sorted(freqdist.items(), key=operator.itemgetter(1))
+
     print "calculate frequency"
 
-    bar = progressbar.ProgressBar(maxval = count, widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
+    bar = progressbar.ProgressBar(maxval = len(freqdist), widgets = [progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()]).start()
 
     i = 0
 
-    for key in freqdist.keys():
+    for item in sorted_freqdist:
 
-        twitter.unigram.insert({'collocation':key, 'frequency':freqdist[key]})
+        twitter.unigram.insert({'collocation':item[0], 'frequency':item[1]})
 
         bar.update(i + 1)
 
         i = i + 1
 
     bar.finish()
-
