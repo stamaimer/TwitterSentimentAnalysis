@@ -1,6 +1,6 @@
 import preprocess
 import pymongo
-import unigram
+import ngrams
 
 def get_db():
 
@@ -18,7 +18,11 @@ def main():
 
     #preprocess.preprocess(twitter)
 
-    unigram.gen_dict(twitter)
+    #ngrams.get_unigram(twitter)
+
+    #ngrams.get_bigram(twitter)
+
+    ngrams.get_trigram(twitter)
 
 if __name__ == '__main__':
 
