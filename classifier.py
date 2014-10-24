@@ -10,15 +10,25 @@ def get_ngrams(twitter, n):
 
         collection = twitter.unigram
 
+        records = collection.find({'frequency':{'$gte':1460, '$lte':107699}}, {'collocation':1, '_id':0})
+
+        print 'generate unigram'
+
     elif 2 == n:
 
         collection = twitter.bigram
+
+        records = collection.find({'frequency':{'$gte':1460, '$lte':107699}}, {'collocation':1, '_id':0})
+
+        print 'generate bigram'
 
     elif 3 == n:
 
         collection = twitter.trigram
 
-    records = collection.find({}, {'collocation':1, '_id':0})
+        records = collection.find({'frequency':{'$gte':1460, '$lte':107699}}, {'collocation':1, '_id':0})
+
+        print 'generate trigram'
 
     collocations = []
 
@@ -36,9 +46,11 @@ def gen_featvect(twitter, n):
 
     count = labeled.count()
 
-    labeled = labeled.find({}, {'text':1, 'label':1, '_id':0})
+    labeled = labeled.find({}, {'text':1, 'label':1, '_id':0}).limit(1)
 
     featvect = [None for _ in range(count)]
+
+    print 'generate featvect'
 
     for item in labeled:
 
@@ -61,6 +73,8 @@ def gen_featvect(twitter, n):
             else:
 
                 featdist[collocation] = 0
+        
+        print type((featdist, item['label']))
 
         featvect.append((featdist, item['label']))
 
