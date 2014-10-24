@@ -1,6 +1,7 @@
 import preprocess
 import pymongo
 import ngrams
+import label
 
 def get_db():
 
@@ -22,7 +23,9 @@ def main():
 
     #ngrams.get_bigram(twitter)
 
-    ngrams.get_trigram(twitter)
+    #ngrams.get_trigram(twitter)
+
+    label.label(twitter)
 
 if __name__ == '__main__':
 
