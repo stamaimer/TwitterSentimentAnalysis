@@ -1,4 +1,5 @@
 import preprocess
+import classifier
 import pymongo
 import ngrams
 import label
@@ -25,7 +26,9 @@ def main():
 
     #ngrams.get_trigram(twitter)
 
-    label.label(twitter)
+    #label.label(twitter)
+
+    classifier.naive_bayes_classifier(twitter, 1)
 
 if __name__ == '__main__':
 

@@ -62,7 +62,7 @@ def gen_featvect(twitter, n):
 
                 featdist[collocation] = 0
 
-        featvect.append((featdist, item[label]))
+        featvect.append((featdist, item['label']))
 
     return featvect
 
@@ -70,11 +70,11 @@ def naive_bayes_classifier(twitter, n):
 
     featvect = gen_featvect(twitter, n)
 
-    for i in range(7):
+    for i in range(5):
 
-        testset = featvect[490897 * i : 490897 * (i + 1)]
+        testset = featvect[68577 * i : 68577 * (i + 1)]
 
-        del featvect[490897 * i : 490897 * (i + 1)]
+        del featvect[68577 * i : 68577 * (i + 1)]
 
         trainset = featvect
 
