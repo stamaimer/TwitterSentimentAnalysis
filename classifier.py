@@ -28,7 +28,7 @@ def get_ngrams(twitter, n):
 
     return collocations
 
-def gen_featvects(twitter, n):
+def gen_featvect(twitter, n):
 
     collocations = get_ngrams(twitter, n)
 
@@ -46,11 +46,11 @@ def gen_featvects(twitter, n):
 
         if 1 == n:
 
-        results = deal[n](item['text'])
+            results = deal[n](item['text'])
 
         else:
 
-        results = deal[n](deal[1](item['text']))
+            results = deal[n](deal[1](item['text']))
 
         for collocation in collocations:
 
@@ -66,12 +66,21 @@ def gen_featvects(twitter, n):
 
     return featvect
 
-def naive_bayes_classifier(twitter):
+def naive_bayes_classifier(twitter, n):
 
-    pass
+    featvect = gen_featvect(twitter, n)
 
+    for i in range(7):
 
+        testset = featvect[490897 * i : 490897 * (i + 1)]
 
+        del featvect[490897 * i : 490897 * (i + 1)]
+
+        trainset = featvect
+
+        classifier = nltk.NaiveBayesClassifier.train(trainset)
+
+        print 'accuracy of naivebayes classifier : ', nltk.classify.accuracy(classifier, testset), '\n'
 
 
 
