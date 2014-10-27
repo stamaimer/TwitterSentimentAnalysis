@@ -46,9 +46,9 @@ def gen_featvect(twitter, n):
 
     count = labeled.count()
 
-    labeled = labeled.find({}, {'text':1, 'label':1, '_id':0}).limit(1)
+    labeled = labeled.find({}, {'text':1, 'label':1, '_id':0})
 
-    featvect = [None for _ in range(count)]
+    featvect = []
 
     print 'generate featvect'
 
@@ -73,10 +73,10 @@ def gen_featvect(twitter, n):
             else:
 
                 featdist[collocation] = 0
-        
-        print type((featdist, item['label']))
 
-        featvect.append((featdist, item['label']))
+        tmp = (featdist, item['label'])
+
+        featvect.append(tmp)
 
     return featvect
 
