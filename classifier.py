@@ -94,7 +94,24 @@ def naive_bayes_classifier(twitter, n):
 
         classifier = nltk.NaiveBayesClassifier.train(trainset)
 
-        print 'accuracy of naivebayes classifier : ', nltk.classify.accuracy(classifier, testset), '\n'
+        print 'accuracy of naivebayes classifier : ', nltk.classify.accuracy(classifier, testset)
+
+def max_ent_classifier(twitter, n):
+
+    featvect = gen_featvect(twitter, n)
+
+    for i in range(5):
+
+        testset = featvect[68577 * i : 68577 * (i * 1)]
+
+        del featvect[68577 * i : 68577 * (i + 1)]
+
+        trainset = featvect
+
+        classifier = nltk.MaxentClassifier.train(trainset)
+
+        print 'accuracy of max_ent_classifier : ', nltk.classify.accuracy(classifier, testset)
+
 
 
 
