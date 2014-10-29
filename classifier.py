@@ -69,7 +69,7 @@ def gen_featvect(twitter, n):
 
     count = labeled.count()
 
-    labeled = labeled.find({}, {'text':1, 'label':1, '_id':0}).limit(100000)
+    labeled = labeled.find({'label':{'$ne':0}}, {'text':1, 'label':1, '_id':0})
 
     featvect = []
 
@@ -107,11 +107,11 @@ def naive_bayes_classifier(twitter, n):
 
     featvect = gen_featvect(twitter, n)
 
-    for i in range(5):
+    for i in range(3):
 
-        testset = featvect[20000 * i : 20000 * (i + 1)]
+        testset = featvect[124167 * i : 124167 * (i + 1)]
 
-        del featvect[20000 * i : 20000 * (i + 1)]
+        del featvect[124167 * i : 124167 * (i + 1)]
 
         trainset = featvect
 
@@ -123,11 +123,11 @@ def max_ent_classifier(twitter, n):
 
     featvect = gen_featvect(twitter, n)
 
-    for i in range(5):
+    for i in range(3):
 
-        testset = featvect[20000 * i : 20000 * (i * 1)]
+        testset = featvect[124167 * i : 124167 * (i * 1)]
 
-        del featvect[20000 * i : 20000 * (i + 1)]
+        del featvect[124167 * i : 124167 * (i + 1)]
 
         trainset = featvect
 
@@ -139,11 +139,11 @@ def svm_classifier(twitter, n):
 
     featvect = gen_featvect(twitter, n)
 
-    for i in range(5):
+    for i in range(3):
 
-        testset = featvect[20000 * i : 20000 * (i * 1)]
+        testset = featvect[124167 * i : 124167 * (i * 1)]
 
-        del featvect[20000 * i : 20000 * (i + 1)]
+        del featvect[124167 * i : 124167 * (i + 1)]
 
         trainset = featvect
 
@@ -155,11 +155,11 @@ def scikit_classifier(twitter, n):
 
     featvect = gen_featvect(twitter, n)
 
-    for i in range(5):
+    for i in range(3):
 
-        testset = featvect[20000 * i : 20000 * (i * 1)]
+        testset = featvect[124167 * i : 124167 * (i * 1)]
 
-        del featvect[20000 * i : 20000 * (i + 1)]
+        del featvect[124167 * i : 124167 * (i + 1)]
 
         trainset = featvect
 
