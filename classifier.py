@@ -125,9 +125,9 @@ def max_ent_classifier(twitter, n):
 
     for i in range(5):
 
-        testset = featvect[68577 * i : 68577 * (i * 1)]
+        testset = featvect[20000 * i : 20000 * (i * 1)]
 
-        del featvect[68577 * i : 68577 * (i + 1)]
+        del featvect[20000 * i : 20000 * (i + 1)]
 
         trainset = featvect
 
