@@ -32,7 +32,9 @@ def main():
 
     #classifier.max_ent_classifier(twitter, 1)
 
-    classifier.svm_classifier(twitter, 1)
+    #classifier.svm_classifier(twitter, 1)
+
+    classifier.scikit_classifier(twitter, 1)
 
 if __name__ == '__main__':
 

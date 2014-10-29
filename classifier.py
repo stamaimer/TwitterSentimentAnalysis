@@ -151,6 +151,23 @@ def svm_classifier(twitter, n):
 
         print 'accuracy of svm_classifier : ', nltk.classify.accuracy(classifier, testset)
 
+def scikit_classifier(twitter, n):
+
+    featvect = gen_featvect(twitter, n)
+
+    for i in range(5):
+
+        testset = featvect[20000 * i : 20000 * (i * 1)]
+
+        del featvect[20000 * i : 20000 * (i + 1)]
+
+        trainset = featvect
+
+        classifier = nltk.SklearnClassifier.train(trainset)
+
+        print 'accuracy of sklearn_classifier : ', nltk.classify.accuracy(classifier, testset)
+
+
 
 
 
