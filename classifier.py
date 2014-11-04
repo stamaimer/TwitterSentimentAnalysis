@@ -1,6 +1,5 @@
 import nltk
 import util
-import collections
 
 icons = [u'\U0001f600', u'\U0001f601', u'\U0001f602', u'\U0001f603',
          u'\U0001f604', u'\U0001f606', u'\u0001f607', u'\U0001f608',
