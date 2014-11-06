@@ -29,7 +29,7 @@ def main():
 
     #label.label(twitter)
 
-    #classifier.naive_bayes_classifier(twitter, 1)
+    classifier.naive_bayes_classifier(twitter, 1)
 
     #classifier.max_ent_classifier(twitter, 1)
 
@@ -37,7 +37,7 @@ def main():
 
     #classifier.scikit_classifier(twitter, 1)
 
-    hashtagfind.hashtagfind(twitter, 1600)
+    #hashtagfind.hashtagfind(twitter, 1600)
 
 if __name__ == '__main__':
 

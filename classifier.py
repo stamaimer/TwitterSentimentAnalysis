@@ -1,3 +1,4 @@
+import collections
 import nltk
 import util
 
@@ -117,6 +118,31 @@ def naive_bayes_classifier(twitter, n):
         classifier = nltk.NaiveBayesClassifier.train(trainset)
 
         print 'accuracy of naivebayes classifier : ', nltk.classify.accuracy(classifier, testset)
+
+	rset = collections.defaultdict(set)
+	tset = collections.defaultdict(set)
+	
+	for n, (feature, classification) in enumerate(testsets):
+
+            rset[classification].add(n)
+
+            temp = classifier.classify(feature)
+
+            tset[temp].add(n)
+
+	print "precision of 1 : ", nltk.metrics.precision(rset[1], tset[1]), "\trecall of 1 : ", nltk.metrics.recall(rset[1], tset[1]), "\tf_measure of 1 : ", nltk.metrics.f_measure(rset[1], tset[1])
+	print "precision of 2 : ", nltk.metrics.precision(rset[2], tset[2]), "\trecall of 2 : ", nltk.metrics.recall(rset[2], tset[2]), "\tf_measure of 2 : ", nltk.metrics.f_measure(rset[2], tset[2])
+	print "precision of 3 : ", nltk.metrics.precision(rset[3], tset[3]), "\trecall of 3 : ", nltk.metrics.recall(rset[3], tset[3]), "\tf_measure of 3 : ", nltk.metrics.f_measure(rset[3], tset[3])
+	print "precision of 4 : ", nltk.metrics.precision(rset[4], tset[4]), "\trecall of 4 : ", nltk.metrics.recall(rset[4], tset[4]), "\tf_measure of 4 : ", nltk.metrics.f_measure(rset[4], tset[4])
+	print "precision of 5 : ", nltk.metrics.precision(rset[5], tset[5]), "\trecall of 5 : ", nltk.metrics.recall(rset[5], tset[5]), "\tf_measure of 5 : ", nltk.metrics.f_measure(rset[5], tset[5])
+	print "precision of 6 : ", nltk.metrics.precision(rset[6], tset[6]), "\trecall of 6 : ", nltk.metrics.recall(rset[6], tset[6]), "\tf_measure of 6 : ", nltk.metrics.f_measure(rset[6], tset[6])
+	print "precision of 7 : ", nltk.metrics.precision(rset[7], tset[7]), "\trecall of 7 : ", nltk.metrics.recall(rset[7], tset[7]), "\tf_measure of 7 : ", nltk.metrics.f_measure(rset[7], tset[7])
+	print "precision of 8 : ", nltk.metrics.precision(rset[8], tset[8]), "\trecall of 8 : ", nltk.metrics.recall(rset[8], tset[8]), "\tf_measure of 8 : ", nltk.metrics.f_measure(rset[8], tset[8])
+
+	print "\n======================================================================\n"
+
+	#print classifier.show_most_informative_features(5)
+
 
 def max_ent_classifier(twitter, n):
 
